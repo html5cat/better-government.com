@@ -107,12 +107,21 @@ body {
   padding: 0.6rem 1.2rem;
   font-family: "Orbitron", sans-serif;
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
+}
+
+.hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 420px);
+  gap: 2.5rem;
+  align-items: end;
+  margin-top: 4rem;
 }
 
 .hero__content {
   max-width: 640px;
-  margin-top: 4rem;
+  margin-top: 0;
   position: relative;
   z-index: 1;
 }
@@ -175,6 +184,236 @@ body {
   gap: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 1.5rem;
+}
+
+.sf-projection {
+  position: relative;
+  z-index: 1;
+  min-height: 330px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  animation: projection-float 4s ease-in-out infinite;
+}
+
+.sf-projection__beam {
+  position: absolute;
+  top: -18px;
+  right: 120px;
+  width: 160px;
+  height: 260px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 240, 255, 0.56),
+    rgba(0, 240, 255, 0.14) 56%,
+    rgba(0, 240, 255, 0)
+  );
+  clip-path: polygon(50% 0%, 98% 100%, 2% 100%);
+  filter: blur(1.5px);
+  opacity: 0.85;
+  animation: beam-pulse 2.8s ease-in-out infinite;
+}
+
+.sf-projection__screen {
+  position: relative;
+  width: min(100%, 360px);
+  aspect-ratio: 12 / 11;
+  border: 2px solid rgba(0, 240, 255, 0.45);
+  background:
+    radial-gradient(circle at 50% -8%, rgba(255, 45, 178, 0.45), transparent 40%),
+    linear-gradient(180deg, rgba(0, 19, 39, 0.92), rgba(6, 12, 22, 0.98));
+  box-shadow:
+    0 0 32px rgba(0, 240, 255, 0.24),
+    inset 0 0 26px rgba(0, 0, 0, 0.82);
+  overflow: hidden;
+}
+
+.sf-projection__screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.09) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  opacity: 0.18;
+  pointer-events: none;
+  animation: scan-roll 7s linear infinite;
+}
+
+.sf-projection__screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 240, 255, 0.22), transparent 28%),
+    linear-gradient(180deg, transparent 55%, rgba(0, 240, 255, 0.12));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.sf-projection__sun {
+  position: absolute;
+  top: 22px;
+  right: 34px;
+  width: 72px;
+  height: 72px;
+  border: 2px solid rgba(255, 235, 59, 0.9);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 235, 59, 0.95),
+    rgba(255, 235, 59, 0.95) 8px,
+    rgba(255, 235, 59, 0.72) 8px,
+    rgba(255, 235, 59, 0.72) 16px
+  );
+  box-shadow: 0 0 18px rgba(255, 235, 59, 0.45);
+  animation: sun-flicker 2.4s steps(2, end) infinite;
+}
+
+.sf-projection__skyline {
+  position: absolute;
+  inset: auto 0 56px 0;
+  height: 155px;
+}
+
+.tower {
+  position: absolute;
+  bottom: 0;
+  border: 1px solid rgba(0, 240, 255, 0.55);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 240, 255, 0.25),
+      rgba(0, 240, 255, 0.25) 6px,
+      rgba(5, 12, 24, 0.78) 6px,
+      rgba(5, 12, 24, 0.78) 12px
+    ),
+    repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 7px,
+      rgba(0, 240, 255, 0.22) 7px,
+      rgba(0, 240, 255, 0.22) 8px
+    ),
+    #07101d;
+  box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.24);
+  animation: tower-flicker 3.5s steps(2, end) infinite;
+}
+
+.tower--1 {
+  left: 12px;
+  width: 38px;
+  height: 84px;
+}
+
+.tower--2 {
+  left: 42px;
+  width: 56px;
+  height: 106px;
+  animation-delay: 0.35s;
+}
+
+.tower--3 {
+  left: 88px;
+  width: 30px;
+  height: 70px;
+  animation-delay: 0.7s;
+}
+
+.tower--4 {
+  left: 114px;
+  width: 64px;
+  height: 124px;
+  animation-delay: 1.1s;
+}
+
+.tower--5 {
+  left: 167px;
+  width: 43px;
+  height: 92px;
+  animation-delay: 0.9s;
+}
+
+.tower--6 {
+  left: 204px;
+  width: 57px;
+  height: 114px;
+  animation-delay: 1.4s;
+}
+
+.tower--7 {
+  left: 250px;
+  width: 36px;
+  height: 80px;
+  animation-delay: 0.55s;
+}
+
+.tower--8 {
+  left: 282px;
+  width: 64px;
+  height: 132px;
+  animation-delay: 1.7s;
+}
+
+.sf-projection__bridge {
+  position: absolute;
+  left: 26px;
+  right: 20px;
+  bottom: 52px;
+  height: 16px;
+  border-top: 2px solid rgba(255, 45, 178, 0.82);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.44);
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 45, 178, 0.65),
+    rgba(255, 45, 178, 0.65) 10px,
+    transparent 10px,
+    transparent 16px
+  );
+  animation: bridge-signal 1.9s steps(2, end) infinite;
+}
+
+.pillar {
+  position: absolute;
+  bottom: 0;
+  width: 7px;
+  background: rgba(0, 240, 255, 0.82);
+}
+
+.pillar--1 {
+  left: 18%;
+  height: 30px;
+}
+
+.pillar--2 {
+  left: 49%;
+  height: 36px;
+}
+
+.pillar--3 {
+  left: 82%;
+  height: 28px;
+}
+
+.sf-projection__water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 58px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 240, 255, 0.42),
+      rgba(0, 240, 255, 0.42) 10px,
+      rgba(8, 26, 50, 0.94) 10px,
+      rgba(8, 26, 50, 0.94) 18px
+    ),
+    linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
+  animation: water-shift 4.6s linear infinite;
 }
 
 .stat__value {
@@ -278,15 +517,98 @@ main {
   gap: 1.5rem;
 }
 
+@keyframes projection-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes beam-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scan-roll {
+  0% {
+    transform: translateY(-18px);
+  }
+  100% {
+    transform: translateY(18px);
+  }
+}
+
+@keyframes tower-flicker {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.23);
+  }
+}
+
+@keyframes sun-flicker {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bridge-signal {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes water-shift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 36px 0, 0 0;
+  }
+}
+
 @media (max-width: 900px) {
   .nav {
     flex-direction: column;
     align-items: flex-start;
   }
 
+  .hero__layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .hero__actions {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .sf-projection {
+    min-height: 260px;
+    margin-top: 1rem;
+    justify-content: flex-start;
+  }
+
+  .sf-projection__screen {
+    width: min(100%, 420px);
   }
 
   .cta {

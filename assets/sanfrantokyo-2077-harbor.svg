@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#130e28"/>
+      <stop offset="52%" stop-color="#181938"/>
+      <stop offset="100%" stop-color="#04070d"/>
+    </linearGradient>
+    <radialGradient id="neonMist" cx="0.2" cy="0.25" r="0.52">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.38"/>
+      <stop offset="50%" stop-color="#ff35ad" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff35ad" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="groundGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22d9ff" stop-opacity="0.36"/>
+      <stop offset="100%" stop-color="#060b12" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#night)"/>
+  <rect width="1920" height="1080" fill="url(#neonMist)"/>
+
+  <g opacity="0.75" fill="#1d2a4a">
+    <polygon points="0,650 170,575 340,620 510,550 720,610 960,540 1240,610 1520,530 1920,610 1920,840 0,840"/>
+  </g>
+
+  <g opacity="0.9">
+    <rect x="70" y="590" width="100" height="250" fill="#142548"/>
+    <rect x="190" y="545" width="130" height="295" fill="#1b2f56"/>
+    <rect x="355" y="510" width="70" height="330" fill="#13284a"/>
+    <rect x="455" y="560" width="120" height="280" fill="#1d2f52"/>
+    <rect x="610" y="490" width="100" height="350" fill="#13284a"/>
+    <rect x="740" y="530" width="140" height="310" fill="#1d2f52"/>
+    <rect x="915" y="470" width="115" height="370" fill="#142548"/>
+    <rect x="1060" y="505" width="160" height="335" fill="#21345b"/>
+    <rect x="1250" y="550" width="120" height="290" fill="#17305a"/>
+    <rect x="1400" y="500" width="90" height="340" fill="#122b4f"/>
+    <rect x="1520" y="565" width="140" height="275" fill="#1b2f56"/>
+    <rect x="1695" y="525" width="130" height="315" fill="#16284c"/>
+  </g>
+
+  <g stroke="#00edff" stroke-opacity="0.4" stroke-width="2">
+    <line x1="70" y1="650" x2="170" y2="650"/>
+    <line x1="190" y1="630" x2="320" y2="630"/>
+    <line x1="455" y1="660" x2="575" y2="660"/>
+    <line x1="740" y1="630" x2="880" y2="630"/>
+    <line x1="915" y1="620" x2="1030" y2="620"/>
+    <line x1="1060" y1="645" x2="1220" y2="645"/>
+    <line x1="1400" y1="640" x2="1490" y2="640"/>
+    <line x1="1520" y1="670" x2="1660" y2="670"/>
+    <line x1="1695" y1="635" x2="1825" y2="635"/>
+  </g>
+
+  <g opacity="0.82">
+    <rect y="770" width="1920" height="310" fill="url(#groundGlow)"/>
+    <polygon points="0,900 320,840 700,900 1130,830 1510,900 1920,845 1920,1080 0,1080" fill="#071320" fill-opacity="0.95"/>
+    <line x1="140" y1="882" x2="1780" y2="882" stroke="#ffea59" stroke-opacity="0.45" stroke-width="4"/>
+    <line x1="180" y1="918" x2="1740" y2="918" stroke="#21f0ff" stroke-opacity="0.35" stroke-width="2"/>
+    <line x1="220" y1="950" x2="1700" y2="950" stroke="#ff4db7" stroke-opacity="0.3" stroke-width="2"/>
+  </g>
+</svg>

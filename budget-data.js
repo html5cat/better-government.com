@@ -101,6 +101,108 @@ const cityBudgetData = [
       { label: '2025', total: 12.9, populationMil: 3.793, shares: [30, 21, 15, 12, 22] },
     ],
   },
+  {
+    slug: 'chicago',
+    city: 'Chicago',
+    state: 'Illinois',
+    shortLabel: 'Chicago',
+    pageTitle: 'Chicago Budget',
+    summary:
+      'Chicago runs a large all-funds budget shaped by public safety, pensions, transit support, neighborhood services, and citywide infrastructure obligations.',
+    fiscalNote:
+      'Chicago labels the budget by calendar year. The atlas uses the same year labels for 2020 through 2025.',
+    budgetBasis:
+      'Totals reflect rough all-funds budget levels in billions of dollars, normalized from annual budget books and budget-overview materials into five comparison buckets.',
+    colors: ['#7e2f21', '#b85c36', '#df9a58', '#4d738f', '#26354d'],
+    categories: [
+      'Public safety & justice',
+      'Pensions, debt & citywide finance',
+      'Transit, streets & infrastructure',
+      'Housing, health & neighborhood services',
+      'Administration, labor & other ops',
+    ],
+    sourceTrail: [
+      'City of Chicago annual budget books and budget-overview materials for 2020-2025',
+      'Totals are rough all-funds levels rather than a single audited spending base',
+      'Category shares are hand-normalized to compare Chicago with other cities in the atlas',
+    ],
+    years: [
+      { label: '2020', total: 11.65, populationMil: 2.747, shares: [28, 24, 16, 12, 20] },
+      { label: '2021', total: 12.76, populationMil: 2.733, shares: [27, 25, 16, 12, 20] },
+      { label: '2022', total: 16.73, populationMil: 2.696, shares: [24, 23, 17, 15, 21] },
+      { label: '2023', total: 16.77, populationMil: 2.665, shares: [24, 23, 17, 15, 21] },
+      { label: '2024', total: 16.62, populationMil: 2.640, shares: [24, 23, 17, 15, 21] },
+      { label: '2025', total: 17.10, populationMil: 2.617, shares: [24, 24, 17, 14, 21] },
+    ],
+  },
+  {
+    slug: 'philadelphia',
+    city: 'Philadelphia',
+    state: 'Pennsylvania',
+    shortLabel: 'Philly',
+    pageTitle: 'Philadelphia Budget',
+    summary:
+      'Philadelphia’s budget emphasizes public safety, education-linked obligations, neighborhood services, housing and health programs, and labor reserves.',
+    fiscalNote:
+      'Philadelphia uses fiscal years labeled by their end year, so FY2020 through FY2025 map directly to the 2020-2025 timeline shown here.',
+    budgetBasis:
+      'Totals reflect rough city operating and capital budget levels in billions of dollars, simplified into five reader-friendly spending buckets.',
+    colors: ['#8b3b1c', '#c66b33', '#e8ae63', '#3d7e78', '#2a3347'],
+    categories: [
+      'Public safety & justice',
+      'Health, housing & human services',
+      'Streets, sanitation & transit support',
+      'Parks, education support & neighborhood services',
+      'Administration, labor reserves & debt',
+    ],
+    sourceTrail: [
+      'City of Philadelphia budget highlights, five-year plans, and capital-program materials',
+      'FY2025 uses the city-approved One Philly budget level; earlier years are rough headline budget figures',
+      'Mix percentages are rounded to make Philadelphia comparable with the rest of the atlas',
+    ],
+    years: [
+      { label: '2020', total: 5.30, populationMil: 1.585, shares: [30, 18, 12, 14, 26] },
+      { label: '2021', total: 5.57, populationMil: 1.577, shares: [29, 19, 12, 14, 26] },
+      { label: '2022', total: 5.80, populationMil: 1.576, shares: [29, 19, 12, 14, 26] },
+      { label: '2023', total: 5.94, populationMil: 1.568, shares: [29, 19, 12, 14, 26] },
+      { label: '2024', total: 6.12, populationMil: 1.551, shares: [28, 20, 12, 14, 26] },
+      { label: '2025', total: 6.37, populationMil: 1.547, shares: [28, 20, 12, 14, 26] },
+    ],
+  },
+  {
+    slug: 'phoenix',
+    city: 'Phoenix',
+    state: 'Arizona',
+    shortLabel: 'Phoenix',
+    pageTitle: 'Phoenix Budget',
+    summary:
+      'Phoenix combines a large general fund with major aviation, water, wastewater, transit, and public-safety operations, producing a broad operating-fund footprint.',
+    fiscalNote:
+      'Phoenix budgets span two calendar years. The atlas labels each cycle by its ending year, so 2025 corresponds to the FY2024-25 budget.',
+    budgetBasis:
+      'Totals reflect official City of Phoenix operating-fund totals from annual Schedule 1 budget documents, converted to billions of dollars for the atlas.',
+    colors: ['#7f2d17', '#b55b2d', '#e09c4f', '#3d768a', '#273247'],
+    categories: [
+      'Public safety',
+      'Water, wastewater & aviation enterprise',
+      'Transit, streets & capital support',
+      'Parks, libraries & neighborhood services',
+      'Administration, solid waste & other ops',
+    ],
+    sourceTrail: [
+      'City of Phoenix Budget Library Schedule 1 operating-fund documents for FY2019-20 through FY2024-25',
+      'The yearly totals here come from official operating-fund schedules rather than a separate atlas estimate',
+      'Bucket shares are normalized from major fund and service clusters for readability',
+    ],
+    years: [
+      { label: '2020', total: 5.05, populationMil: 1.681, shares: [24, 34, 15, 9, 18] },
+      { label: '2021', total: 5.70, populationMil: 1.694, shares: [24, 34, 14, 9, 19] },
+      { label: '2022', total: 6.35, populationMil: 1.707, shares: [24, 33, 15, 9, 19] },
+      { label: '2023', total: 7.03, populationMil: 1.624, shares: [23, 34, 15, 9, 19] },
+      { label: '2024', total: 8.03, populationMil: 1.650, shares: [23, 34, 15, 9, 19] },
+      { label: '2025', total: 8.86, populationMil: 1.671, shares: [23, 34, 15, 9, 19] },
+    ],
+  },
 ];
 
 window.cityBudgetData = cityBudgetData;

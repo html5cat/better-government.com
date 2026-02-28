@@ -3,198 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Better Government SF | Night City Civic Hub</title>
+    <title>Better Government | USA City Budget Atlas</title>
+    <meta
+      name="description"
+      content="Browse rough 2020-2025 budget breakdowns for major U.S. cities, normalized into readable civic spending categories."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div class="scanlines"></div>
-    <header class="hero">
-      <nav class="nav">
-        <div class="logo">
-          <span class="logo__accent">BG</span> San Francisco
-        </div>
-        <div class="nav__links">
-          <a href="#services">Services</a>
-          <a href="#initiatives">Initiatives</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <a class="nav__cta" href="https://v0-bettergovernment.vercel.app/">Launch Civic Portal</a>
+  <body class="page-shell">
+    <div class="page-glow" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">BG</span>
+        <span>City Budget Atlas</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#cities">Cities</a>
+        <a href="#method">Method</a>
       </nav>
-
-      <div class="hero__layout">
-        <div class="hero__content">
-          <p class="hero__tag">Night City-Grade Transparency</p>
-          <h1>Better Government of San Francisco</h1>
-          <p class="hero__subtitle">
-            A cybernetic civic command center that turns policy into action, powered by
-            real-time data, community ops, and luminous accountability.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="https://v0-bettergovernment.vercel.app/">Engage the Grid</a>
-            <a class="btn btn--ghost" href="https://v0-bettergovernment.vercel.app/">View the Civic Feed</a>
-          </div>
-          <div class="hero__stats">
-            <div>
-              <span class="stat__value">98%</span>
-              <span class="stat__label">Transparency Index</span>
-            </div>
-            <div>
-              <span class="stat__value">24/7</span>
-              <span class="stat__label">Community Response</span>
-            </div>
-            <div>
-              <span class="stat__value">312</span>
-              <span class="stat__label">Active Initiatives</span>
-            </div>
-          </div>
-        </div>
-        <aside class="sf-projection" aria-hidden="true">
-          <div class="sf-projection__beam"></div>
-          <div class="sf-projection__screen">
-            <div class="sf-projection__stars">
-              <span class="star star--1"></span>
-              <span class="star star--2"></span>
-              <span class="star star--3"></span>
-              <span class="star star--4"></span>
-              <span class="star star--5"></span>
-              <span class="star star--6"></span>
-            </div>
-            <div class="sf-projection__sun"></div>
-            <div class="sf-projection__hills"></div>
-            <div class="sf-projection__skyline">
-              <span class="landmark landmark--salesforce"></span>
-              <span class="landmark landmark--transamerica"></span>
-              <span class="landmark landmark--coit"></span>
-              <span class="landmark landmark--ferry"></span>
-              <span class="tower tower--1"></span>
-              <span class="tower tower--2"></span>
-              <span class="tower tower--3"></span>
-              <span class="tower tower--4"></span>
-              <span class="tower tower--5"></span>
-              <span class="tower tower--6"></span>
-              <span class="tower tower--7"></span>
-              <span class="tower tower--8"></span>
-            </div>
-            <div class="sf-projection__bridge">
-              <span class="pillar pillar--1"></span>
-              <span class="pillar pillar--2"></span>
-              <span class="pillar pillar--3"></span>
-              <span class="cable cable--1"></span>
-              <span class="cable cable--2"></span>
-              <span class="cable cable--3"></span>
-              <span class="cable cable--4"></span>
-              <span class="cable cable--5"></span>
-            </div>
-            <div class="sf-projection__island"></div>
-            <div class="sf-projection__ferry"></div>
-            <div class="sf-projection__water"></div>
-            <div class="sf-projection__foreground">
-              <span class="house house--1"></span>
-              <span class="house house--2"></span>
-              <span class="house house--3"></span>
-              <span class="house house--4"></span>
-              <span class="tram"></span>
-            </div>
-          </div>
-        </aside>
-      </div>
     </header>
 
     <main>
-      <section id="services" class="panel">
-        <h2>Citizen Interface Modules</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Signal a Need</h3>
-            <p>
-              File service requests, report hazards, and auto-route issues to the
-              nearest response crew.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Policy Pulse</h3>
-            <p>
-              Track legislation, meeting outcomes, and committee votes with neon-clear
-              visualizations.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Budget Vision</h3>
-            <p>
-              Explore live budget allocations and see how resources fuel every
-              neighborhood.
-            </p>
-          </article>
+      <section class="hero-block reveal">
+        <div class="hero-block__copy">
+          <p class="eyebrow">2020-2025 Civic Budget Atlas</p>
+          <h1>Rough budget pages for major U.S. cities, built for fast comparison.</h1>
+          <p class="hero-block__lede">
+            Each city page turns official budget books into a simpler, normalized view of
+            how money moved across public safety, housing, infrastructure, and core city
+            operations from 2020 through 2025.
+          </p>
+          <div class="hero-block__actions">
+            <a class="button button--primary" href="#cities">Browse Cities</a>
+            <a class="button button--ghost" href="#method">How The Numbers Work</a>
+          </div>
         </div>
+        <aside class="hero-block__panel">
+          <p class="panel-kicker">Why this exists</p>
+          <div class="metric-stack">
+            <div class="metric-stack__item">
+              <span class="metric-stack__value">3</span>
+              <span class="metric-stack__label">Launch cities with dedicated pages</span>
+            </div>
+            <div class="metric-stack__item">
+              <span class="metric-stack__value">18</span>
+              <span class="metric-stack__label">Annual budget snapshots rendered from one data file</span>
+            </div>
+            <div class="metric-stack__item">
+              <span class="metric-stack__value">5</span>
+              <span class="metric-stack__label">Normalized spending buckets per city</span>
+            </div>
+          </div>
+        </aside>
       </section>
 
-      <section id="initiatives" class="panel panel--alt">
-        <h2>High-Voltage Initiatives</h2>
-        <div class="initiative">
-          <div>
-            <h3>Green Grid Retrofit</h3>
-            <p>
-              Modernizing city infrastructure with clean energy microgrids and
-              autonomous maintenance bots.
-            </p>
-          </div>
-          <span class="initiative__status">78% live</span>
+      <section id="cities" class="section-block">
+        <div class="section-heading reveal">
+          <p class="eyebrow">City Pages</p>
+          <h2>Start with the biggest municipal operating footprints.</h2>
+          <p>
+            The cards below are rendered from shared budget data. Adding more city pages
+            is now a data-entry task rather than a full layout rewrite.
+          </p>
         </div>
-        <div class="initiative">
-          <div>
-            <h3>Neighborhood Sync Network</h3>
-            <p>
-              Bi-directional communication hubs that keep every district aligned in
-              real time.
-            </p>
-          </div>
-          <span class="initiative__status">114 nodes</span>
-        </div>
-        <div class="initiative">
-          <div>
-            <h3>Equity Access Protocol</h3>
-            <p>
-              Layered services ensuring every resident taps into housing, food, and
-              workforce resources.
-            </p>
-          </div>
-          <span class="initiative__status">In rollout</span>
-        </div>
+        <div id="city-grid" class="city-grid" aria-live="polite"></div>
       </section>
 
-      <section id="contact" class="panel">
-        <div class="cta">
-          <div>
-            <h2>Patch into the Civic Ops Channel</h2>
-            <p>
-              Submit feedback, schedule a listening session, or join a community
-              sprint. We respond in hours, not weeks.
-            </p>
-          </div>
-          <form class="cta__form">
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <button type="submit" class="btn btn--primary">Send Signal</button>
-          </form>
+      <section id="method" class="section-block section-block--split reveal">
+        <div>
+          <p class="eyebrow">Method</p>
+          <h2>These are rough comparisons, not audit tables.</h2>
+        </div>
+        <div class="method-card">
+          <p>
+            Totals are based on official adopted, current, or proposed all-funds city
+            budgets depending on what each city publishes clearly for a given year.
+          </p>
+          <p>
+            The category mix is hand-grouped and rounded to make different city budget
+            books comparable. Percentages are intentionally directional.
+          </p>
+          <p>
+            City pages include the source trail and fiscal-year notes needed to interpret
+            each timeline.
+          </p>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>© 2077 Better Government SF. All systems accountable.</p>
-      <div class="footer__links">
-        <a href="#">Privacy Protocols</a>
-        <a href="#">Accessibility Matrix</a>
-        <a href="#">Open Data</a>
-      </div>
+    <footer class="site-footer reveal">
+      <p>Better Government city budget atlas.</p>
+      <p>Built for rough civic comparisons across budget years 2020-2025.</p>
     </footer>
 
+    <script src="budget-data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

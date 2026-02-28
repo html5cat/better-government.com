@@ -221,6 +221,7 @@ const cityBudgetSeedData = [
     state: 'Japan',
     currencyPrefix: 'JPY ',
     budgetUnit: 'T',
+    usdPerUnit: 0.00648,
     shortLabel: 'Tokyo',
     pageTitle: 'Tokyo Budget',
     summary:
@@ -257,6 +258,7 @@ const cityBudgetSeedData = [
     state: 'Japan',
     currencyPrefix: 'JPY ',
     budgetUnit: 'T',
+    usdPerUnit: 0.00648,
     shortLabel: 'Kyoto',
     pageTitle: 'Kyoto Budget',
     summary:
@@ -293,6 +295,7 @@ const cityBudgetSeedData = [
     state: 'British Columbia, Canada',
     currencyPrefix: 'C$',
     budgetUnit: 'B',
+    usdPerUnit: 0.7376,
     shortLabel: 'Vancouver',
     pageTitle: 'Vancouver Budget',
     summary:
@@ -329,6 +332,7 @@ const cityBudgetSeedData = [
     state: 'Portugal',
     currencyPrefix: 'EUR ',
     budgetUnit: 'B',
+    usdPerUnit: 1.1885,
     shortLabel: 'Lisbon',
     pageTitle: 'Lisbon Budget',
     summary:
@@ -365,6 +369,7 @@ const cityBudgetSeedData = [
     state: 'United Kingdom',
     currencyPrefix: 'GBP ',
     budgetUnit: 'B',
+    usdPerUnit: 1.3729,
     shortLabel: 'London',
     pageTitle: 'London Budget',
     summary:
@@ -401,6 +406,7 @@ const cityBudgetSeedData = [
     state: 'France',
     currencyPrefix: 'EUR ',
     budgetUnit: 'B',
+    usdPerUnit: 1.1885,
     shortLabel: 'Paris',
     pageTitle: 'Paris Budget',
     summary:
@@ -507,6 +513,11 @@ function expandCityYears(city) {
     ...city,
     sourceTrail: [
       ...city.sourceTrail,
+      ...(city.usdPerUnit
+        ? [
+            'USD equivalents use fixed Federal Reserve H.10 reference rates from the January 30, 2026 weekly table released on February 2, 2026.',
+          ]
+        : []),
       '2000-2019 rows are smooth historical estimates backcast from the published 2020-2025 anchors in this atlas.',
     ],
     years: [...historicalYears, ...anchorYears],

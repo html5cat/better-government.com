@@ -8,12 +8,39 @@ function getBudgetMagnitude(city) {
   return getBudgetUnit(city) === 'T' ? 1000000 : 1000;
 }
 
+function getUsdBudgetBillions(value, city) {
+  if (!city.usdPerUnit) {
+    return null;
+  }
+
+  const budgetScale = getBudgetUnit(city) === 'T' ? 1000 : 1;
+  return value * city.usdPerUnit * budgetScale;
+}
+
+function formatUsdBudget(value) {
+  if (value >= 10) {
+    return `$${value.toFixed(1)}B`;
+  }
+
+  if (value >= 1) {
+    return `$${value.toFixed(2)}B`;
+  }
+
+  return `$${Math.round(value * 1000).toLocaleString()}M`;
+}
+
 function formatBudget(value, city) {
   const unit = getBudgetUnit(city);
   const prefix = city.currencyPrefix || '$';
   const decimals = value >= 10 ? 1 : 2;
+  const localValue = `${prefix}${value.toFixed(decimals)}${unit}`;
+  const usdValue = getUsdBudgetBillions(value, city);
 
-  return `${prefix}${value.toFixed(decimals)}${unit}`;
+  if (!usdValue) {
+    return localValue;
+  }
+
+  return `${localValue} (${formatUsdBudget(usdValue)} USD)`;
 }
 
 function formatDelta(value) {
@@ -24,7 +51,13 @@ function formatDelta(value) {
 function formatPerResident(total, populationMil, city) {
   const perResident = (total * getBudgetMagnitude(city)) / populationMil;
   const prefix = city.currencyPrefix || '$';
-  return `${prefix}${Math.round(perResident).toLocaleString()}`;
+  const localValue = `${prefix}${Math.round(perResident).toLocaleString()}`;
+
+  if (!city.usdPerUnit) {
+    return localValue;
+  }
+
+  return `${localValue} ($${Math.round(perResident * city.usdPerUnit).toLocaleString()} USD)`;
 }
 
 function formatPopulation(populationMil) {
@@ -116,5 +149,6 @@ window.BudgetAtlas = {
   formatBudget,
   formatPerResident,
   formatPopulation,
+  formatUsdBudget,
   revealElements,
 };

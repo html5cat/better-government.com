@@ -5,7 +5,12 @@ function formatCategoryAmount(city, total, share) {
   const value = (total * share) / 100;
 
   if ((city.budgetUnit || 'B') === 'T' && value < 1) {
-    return `${city.currencyPrefix}${(value * 1000).toFixed(0)}B`;
+    const localValue = `${city.currencyPrefix}${(value * 1000).toFixed(0)}B`;
+    if (!city.usdPerUnit) {
+      return localValue;
+    }
+
+    return `${localValue} (${atlasHelpers.formatUsdBudget(value * city.usdPerUnit * 1000)} USD)`;
   }
 
   return atlasHelpers.formatBudget(value, city);

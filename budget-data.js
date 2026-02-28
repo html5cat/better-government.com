@@ -1,5 +1,39 @@
 const cityBudgetData = [
   {
+    slug: 'san-francisco',
+    city: 'San Francisco',
+    state: 'California',
+    shortLabel: 'SF',
+    pageTitle: 'San Francisco Budget',
+    summary:
+      'A high-spend coastal city budget shaped by public health, homelessness response, transit recovery, public safety, and citywide labor costs.',
+    fiscalNote:
+      'San Francisco labels budgets by fiscal year pairs. The atlas maps each budget to its ending year, so 2025 corresponds to FY2024-25.',
+    budgetBasis:
+      'Totals reflect adopted all-department budgets in billions of dollars. Category shares are rough normalized groupings that compress departmental detail into broad public-facing buckets.',
+    colors: ['#8e3b1f', '#d17b35', '#efb458', '#3f7a86', '#243147'],
+    categories: [
+      'Public health, housing & human services',
+      'Public safety & emergency response',
+      'Transit, streets & public works',
+      'Children, culture & neighborhood services',
+      'Administration, debt & citywide ops',
+    ],
+    sourceTrail: [
+      'San Francisco Mayor budget books and annual appropriation materials',
+      '2020 maps to the FY2019-20 budget; 2025 maps to the FY2024-25 adopted budget',
+      'Category shares are rounded after hand-grouping departments and citywide cost centers',
+    ],
+    years: [
+      { label: '2020', total: 12.3, shares: [29, 18, 17, 11, 25] },
+      { label: '2021', total: 13.1, shares: [30, 18, 16, 11, 25] },
+      { label: '2022', total: 14.0, shares: [31, 17, 16, 11, 25] },
+      { label: '2023', total: 14.6, shares: [31, 17, 16, 11, 25] },
+      { label: '2024', total: 15.3, shares: [31, 17, 15, 11, 26] },
+      { label: '2025', total: 15.9, shares: [32, 17, 15, 10, 26] },
+    ],
+  },
+  {
     slug: 'new-york',
     city: 'New York City',
     state: 'New York',
@@ -65,40 +99,6 @@ const cityBudgetData = [
       { label: '2023', total: 11.78, shares: [31, 20, 13, 13, 23] },
       { label: '2024', total: 13.15, shares: [30, 21, 14, 13, 22] },
       { label: '2025', total: 12.9, shares: [30, 21, 15, 12, 22] },
-    ],
-  },
-  {
-    slug: 'houston',
-    city: 'Houston',
-    state: 'Texas',
-    shortLabel: 'Houston',
-    pageTitle: 'Houston Budget',
-    summary:
-      'Houston’s all-funds budget leans heavily toward public safety and enterprise-style city operations such as airports, utilities, drainage, and mobility.',
-    fiscalNote:
-      'Houston’s official documents vary by year between adopted, current, and proposed all-funds totals. The timeline keeps those headline figures directional rather than exact.',
-    budgetBasis:
-      'Totals are official all-funds figures in billions of dollars drawn from adopted or proposed budget books. Category shares are rough normalized groupings built for readability.',
-    colors: ['#7c2d12', '#ad5c2e', '#d3a15e', '#3d7b73', '#223248'],
-    categories: [
-      'Public safety',
-      'Utilities & enterprise operations',
-      'Streets, drainage & mobility',
-      'Health, housing & neighborhood services',
-      'Administration, debt & reserves',
-    ],
-    sourceTrail: [
-      'City of Houston adopted budget books and FY2025 budget proposal materials',
-      '2020-2024 include official current or adopted all-funds totals where those are the clearest published figures',
-      'Percentages are rounded to whole numbers after hand-grouping large department clusters',
-    ],
-    years: [
-      { label: '2020', total: 5.49, shares: [33, 28, 14, 10, 15] },
-      { label: '2021', total: 5.56, shares: [33, 27, 15, 10, 15] },
-      { label: '2022', total: 5.75, shares: [34, 27, 14, 10, 15] },
-      { label: '2023', total: 6.24, shares: [34, 26, 15, 10, 15] },
-      { label: '2024', total: 6.29, shares: [33, 27, 15, 10, 15] },
-      { label: '2025', total: 6.73, shares: [32, 28, 15, 10, 15] },
     ],
   },
 ];

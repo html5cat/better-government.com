@@ -48,40 +48,152 @@ function buildCityNav() {
   `;
 }
 
-function buildLinePath(values, width, height, padding) {
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  const xStep = values.length > 1 ? (width - padding * 2) / (values.length - 1) : 0;
-  const yRange = max - min || 1;
+function formatLocalBudget(value, city) {
+  const unit = city.budgetUnit || 'B';
+  const prefix = city.currencyPrefix || '$';
+  const decimals = value === 0 ? 0 : value >= 10 ? 0 : value >= 1 ? 1 : 2;
+  return `${prefix}${value.toFixed(decimals)}${unit}`;
+}
+
+function formatCompactCurrency(value, city) {
+  const prefix = city.currencyPrefix || '$';
+
+  if (value >= 1000000) {
+    return `${prefix}${(value / 1000000).toFixed(1)}M`;
+  }
+
+  if (value >= 1000) {
+    return `${prefix}${Math.round(value / 1000)}k`;
+  }
+
+  return `${prefix}${Math.round(value)}`;
+}
+
+function getNiceStep(maxValue, tickCount) {
+  if (maxValue <= 0) {
+    return 1;
+  }
+
+  const rawStep = maxValue / tickCount;
+  const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep)));
+  const residual = rawStep / magnitude;
+
+  if (residual <= 1) {
+    return magnitude;
+  }
+
+  if (residual <= 2) {
+    return 2 * magnitude;
+  }
+
+  if (residual <= 5) {
+    return 5 * magnitude;
+  }
+
+  return 10 * magnitude;
+}
+
+function getChartGeometry(width, height) {
+  return {
+    left: 68,
+    right: 20,
+    top: 18,
+    bottom: 40,
+    plotWidth: width - 88,
+    plotHeight: height - 58,
+  };
+}
+
+function getXCoordinate(index, totalPoints, geometry) {
+  if (totalPoints === 1) {
+    return geometry.left;
+  }
+
+  return geometry.left + (geometry.plotWidth * index) / (totalPoints - 1);
+}
+
+function getYCoordinate(value, maxValue, geometry) {
+  const safeMax = maxValue || 1;
+  return geometry.top + geometry.plotHeight - (value / safeMax) * geometry.plotHeight;
+}
+
+function buildLinePath(values, maxValue, geometry) {
+  const totalPoints = values.length;
 
   return values
     .map((value, index) => {
-      const x = padding + xStep * index;
-      const y = height - padding - ((value - min) / yRange) * (height - padding * 2);
+      const x = getXCoordinate(index, totalPoints, geometry);
+      const y = getYCoordinate(value, maxValue, geometry);
       return `${index === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
     })
     .join(' ');
 }
 
-function buildAreaPath(values, width, height, padding) {
-  const linePath = buildLinePath(values, width, height, padding);
-  const xStep = values.length > 1 ? (width - padding * 2) / (values.length - 1) : 0;
-  const endX = padding + xStep * (values.length - 1);
+function buildAreaPath(values, maxValue, geometry) {
+  const linePath = buildLinePath(values, maxValue, geometry);
+  const endX = getXCoordinate(values.length - 1, values.length, geometry);
+  const baselineY = geometry.top + geometry.plotHeight;
 
-  return `${linePath} L ${endX.toFixed(2)} ${(height - padding).toFixed(2)} L ${padding.toFixed(2)} ${(height - padding).toFixed(2)} Z`;
+  return `${linePath} L ${endX.toFixed(2)} ${baselineY.toFixed(2)} L ${geometry.left.toFixed(2)} ${baselineY.toFixed(2)} Z`;
+}
+
+function buildYAxisTicks(maxValue, geometry, formatTick) {
+  const step = getNiceStep(maxValue, 4);
+  const niceMax = step * 4;
+  const ticks = [];
+
+  for (let value = 0; value <= niceMax; value += step) {
+    const y = getYCoordinate(value, niceMax, geometry);
+    ticks.push(`
+      <g class="chart-tick">
+        <line x1="${geometry.left}" y1="${y.toFixed(2)}" x2="${(geometry.left + geometry.plotWidth).toFixed(2)}" y2="${y.toFixed(2)}" class="chart-gridline" />
+        <text x="${(geometry.left - 10).toFixed(2)}" y="${(y + 4).toFixed(2)}" text-anchor="end" class="chart-label">${formatTick(value)}</text>
+      </g>
+    `);
+  }
+
+  return {
+    niceMax,
+    markup: ticks.join(''),
+  };
+}
+
+function buildXAxisTicks(years, geometry) {
+  const tickYears = years.filter((year, index) => {
+    const numericYear = Number(year.label);
+    return index === 0 || index === years.length - 1 || numericYear % 5 === 0;
+  });
+
+  return tickYears
+    .map((year) => {
+      const index = years.findIndex((entry) => entry.label === year.label);
+      const x = getXCoordinate(index, years.length, geometry);
+      const axisY = geometry.top + geometry.plotHeight;
+
+      return `
+        <g class="chart-tick">
+          <line x1="${x.toFixed(2)}" y1="${axisY.toFixed(2)}" x2="${x.toFixed(2)}" y2="${(axisY + 6).toFixed(2)}" class="chart-axis-marker" />
+          <text x="${x.toFixed(2)}" y="${(axisY + 22).toFixed(2)}" text-anchor="middle" class="chart-label">${year.label}</text>
+        </g>
+      `;
+    })
+    .join('');
 }
 
 function buildSparkChart(city, years, valueAccessor, options) {
   const width = 560;
-  const height = 220;
-  const padding = 24;
+  const height = 260;
+  const geometry = getChartGeometry(width, height);
   const values = years.map(valueAccessor);
-  const linePath = buildLinePath(values, width, height, padding);
-  const areaPath = buildAreaPath(values, width, height, padding);
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+  const yAxis = buildYAxisTicks(max, geometry, options.axisFormat);
+  const linePath = buildLinePath(values, yAxis.niceMax, geometry);
+  const areaPath = buildAreaPath(values, yAxis.niceMax, geometry);
+  const xAxisTicks = buildXAxisTicks(years, geometry);
   const startLabel = years[0].label;
   const endLabel = years[years.length - 1].label;
-  const min = Math.min(...values);
-  const max = Math.max(...values);
+  const axisY = geometry.top + geometry.plotHeight;
 
   return `
     <article class="chart-card reveal">
@@ -93,9 +205,12 @@ function buildSparkChart(city, years, valueAccessor, options) {
         <p class="chart-card__range">${options.format(max)} high · ${options.format(min)} low</p>
       </div>
       <svg class="chart-card__svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${options.title} from ${startLabel} to ${endLabel}">
-        <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" class="chart-axis" />
+        ${yAxis.markup}
+        <line x1="${geometry.left}" y1="${geometry.top}" x2="${geometry.left}" y2="${axisY}" class="chart-axis" />
+        <line x1="${geometry.left}" y1="${axisY}" x2="${(geometry.left + geometry.plotWidth).toFixed(2)}" y2="${axisY}" class="chart-axis" />
         <path d="${areaPath}" class="chart-area" style="fill:${options.fill}" />
         <path d="${linePath}" class="chart-line" style="stroke:${options.stroke}" />
+        ${xAxisTicks}
       </svg>
       <div class="chart-card__footer">
         <span>${startLabel}</span>
@@ -171,6 +286,7 @@ function renderCityPage() {
           stroke: city.colors[0],
           fill: 'rgba(159, 77, 39, 0.14)',
           format: (value) => atlasHelpers.formatBudget(value, city),
+          axisFormat: (value) => formatLocalBudget(value, city),
         }
       )}
       ${buildSparkChart(
@@ -183,6 +299,7 @@ function renderCityPage() {
           stroke: city.colors[3],
           fill: 'rgba(47, 127, 118, 0.14)',
           format: (value) => `${city.currencyPrefix}${Math.round(value).toLocaleString()}`,
+          axisFormat: (value) => formatCompactCurrency(value, city),
         }
       )}
     </section>

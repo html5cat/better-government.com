@@ -311,6 +311,22 @@ main {
   stroke-width: 1.5;
 }
 
+.chart-axis-marker {
+  stroke: rgba(31, 38, 51, 0.2);
+  stroke-width: 1.2;
+}
+
+.chart-gridline {
+  stroke: rgba(31, 38, 51, 0.1);
+  stroke-width: 1;
+}
+
+.chart-label {
+  fill: var(--muted);
+  font-size: 11px;
+  font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+}
+
 .chart-line {
   fill: none;
   stroke-width: 4;

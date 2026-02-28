@@ -1,14 +1,14 @@
 const atlasData = window.cityBudgetData || [];
 const atlasHelpers = window.BudgetAtlas || {};
 
-function formatCategoryAmount(total, share) {
+function formatCategoryAmount(city, total, share) {
   const value = (total * share) / 100;
 
-  if (value >= 1) {
-    return `$${value.toFixed(1)}B`;
+  if ((city.budgetUnit || 'B') === 'T' && value < 1) {
+    return `${city.currencyPrefix}${(value * 1000).toFixed(0)}B`;
   }
 
-  return `$${(value * 1000).toFixed(0)}M`;
+  return atlasHelpers.formatBudget(value, city);
 }
 
 function buildSegments(city, year) {
@@ -29,15 +29,23 @@ function buildLegend(city, year) {
         <li class="legend-list__item">
           <span class="legend-list__swatch" style="background:${color}"></span>
           <span>${category}</span>
-          <strong>${share}% · ${formatCategoryAmount(year.total, share)}</strong>
+          <strong>${share}% · ${formatCategoryAmount(city, year.total, share)}</strong>
         </li>
       `;
     })
     .join('');
 }
 
+function buildCityNav() {
+  return `
+    <a href="../index.html#cities">All Cities</a>
+    <a href="../index.html#method">Method</a>
+  `;
+}
+
 function renderCityPage() {
   const pageRoot = document.querySelector('#city-page');
+  const navRoot = document.querySelector('.site-nav');
 
   if (!pageRoot) {
     return;
@@ -63,6 +71,10 @@ function renderCityPage() {
   const largestShare = Math.max(...latestYear.shares);
   const largestCategory = city.categories[latestYear.shares.indexOf(largestShare)];
 
+  if (navRoot) {
+    navRoot.innerHTML = buildCityNav();
+  }
+
   pageRoot.innerHTML = `
     <section class="city-hero reveal">
       <div class="city-hero__copy">
@@ -70,8 +82,8 @@ function renderCityPage() {
         <h1>${city.pageTitle}</h1>
         <p class="city-hero__summary">${city.summary}</p>
         <div class="city-hero__chips">
-          <span class="chip">2025 total ${atlasHelpers.formatBudget(latestYear.total)}</span>
-          <span class="chip">2025 per resident ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil)}</span>
+          <span class="chip">2025 total ${atlasHelpers.formatBudget(latestYear.total, city)}</span>
+          <span class="chip">2025 per resident ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)}</span>
           <span class="chip">2020-2025 change ${growth > 0 ? '+' : ''}${growth.toFixed(1)}%</span>
           <span class="chip">Largest 2025 bucket ${largestCategory}</span>
         </div>
@@ -100,8 +112,8 @@ function renderCityPage() {
                 <div class="timeline-card__header">
                   <div>
                     <p class="timeline-card__year">${year.label}</p>
-                    <h3>${atlasHelpers.formatBudget(year.total)}</h3>
-                    <p class="timeline-card__meta">${atlasHelpers.formatPerResident(year.total, year.populationMil)} per resident · ${atlasHelpers.formatPopulation(year.populationMil)}</p>
+                    <h3>${atlasHelpers.formatBudget(year.total, city)}</h3>
+                    <p class="timeline-card__meta">${atlasHelpers.formatPerResident(year.total, year.populationMil, city)} per resident · ${atlasHelpers.formatPopulation(year.populationMil)}</p>
                   </div>
                   <span class="timeline-card__share">${Math.max(...year.shares)}% top share</span>
                 </div>
@@ -123,8 +135,8 @@ function renderCityPage() {
         <p class="eyebrow">Readout</p>
         <h2>What stands out in this city.</h2>
         <ul class="bullet-list">
-          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total)} in 2020 to ${atlasHelpers.formatBudget(latestYear.total)} in 2025.</li>
-          <li>Estimated spending per resident moved from ${atlasHelpers.formatPerResident(firstYear.total, firstYear.populationMil)} to ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil)} over the same span.</li>
+          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total, city)} in 2020 to ${atlasHelpers.formatBudget(latestYear.total, city)} in 2025.</li>
+          <li>Estimated spending per resident moved from ${atlasHelpers.formatPerResident(firstYear.total, firstYear.populationMil, city)} to ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)} over the same span.</li>
           <li>${largestCategory} is the biggest normalized category in the latest year at ${largestShare}%.</li>
           <li>The mix is rounded so readers can compare broad civic priorities without wading through hundreds of budget line items.</li>
         </ul>

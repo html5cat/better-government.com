@@ -1,11 +1,19 @@
 const cityData = window.cityBudgetData || [];
 
-function formatBudget(value) {
-  if (value >= 10) {
-    return `$${value.toFixed(1)}B`;
-  }
+function getBudgetUnit(city) {
+  return city.budgetUnit || 'B';
+}
 
-  return `$${value.toFixed(2)}B`;
+function getBudgetMagnitude(city) {
+  return getBudgetUnit(city) === 'T' ? 1000000 : 1000;
+}
+
+function formatBudget(value, city) {
+  const unit = getBudgetUnit(city);
+  const prefix = city.currencyPrefix || '$';
+  const decimals = value >= 10 ? 1 : 2;
+
+  return `${prefix}${value.toFixed(decimals)}${unit}`;
 }
 
 function formatDelta(value) {
@@ -13,9 +21,10 @@ function formatDelta(value) {
   return `${sign}${value.toFixed(1)}%`;
 }
 
-function formatPerResident(total, populationMil) {
-  const dollars = (total * 1000) / populationMil;
-  return `$${Math.round(dollars).toLocaleString()}`;
+function formatPerResident(total, populationMil, city) {
+  const perResident = (total * getBudgetMagnitude(city)) / populationMil;
+  const prefix = city.currencyPrefix || '$';
+  return `${prefix}${Math.round(perResident).toLocaleString()}`;
 }
 
 function formatPopulation(populationMil) {
@@ -77,7 +86,7 @@ function renderCityCards() {
           <dl class="city-card__stats">
             <div>
               <dt>2025 total</dt>
-              <dd>${formatBudget(latestYear.total)}</dd>
+              <dd>${formatBudget(latestYear.total, city)}</dd>
             </div>
             <div>
               <dt>2020-2025 change</dt>
@@ -85,7 +94,7 @@ function renderCityCards() {
             </div>
             <div>
               <dt>2025 per resident</dt>
-              <dd>${formatPerResident(latestYear.total, latestYear.populationMil)}</dd>
+              <dd>${formatPerResident(latestYear.total, latestYear.populationMil, city)}</dd>
             </div>
             <div>
               <dt>Largest 2025 bucket</dt>

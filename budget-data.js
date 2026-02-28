@@ -3,6 +3,8 @@ const cityBudgetData = [
     slug: 'san-francisco',
     city: 'San Francisco',
     state: 'California',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'SF',
     pageTitle: 'San Francisco Budget',
     summary:
@@ -37,6 +39,8 @@ const cityBudgetData = [
     slug: 'new-york',
     city: 'New York City',
     state: 'New York',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'NYC',
     pageTitle: 'New York City Budget',
     summary:
@@ -71,6 +75,8 @@ const cityBudgetData = [
     slug: 'los-angeles',
     city: 'Los Angeles',
     state: 'California',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'LA',
     pageTitle: 'Los Angeles Budget',
     summary:
@@ -105,6 +111,8 @@ const cityBudgetData = [
     slug: 'chicago',
     city: 'Chicago',
     state: 'Illinois',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'Chicago',
     pageTitle: 'Chicago Budget',
     summary:
@@ -139,6 +147,8 @@ const cityBudgetData = [
     slug: 'philadelphia',
     city: 'Philadelphia',
     state: 'Pennsylvania',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'Philly',
     pageTitle: 'Philadelphia Budget',
     summary:
@@ -173,6 +183,8 @@ const cityBudgetData = [
     slug: 'phoenix',
     city: 'Phoenix',
     state: 'Arizona',
+    currencyPrefix: '$',
+    budgetUnit: 'B',
     shortLabel: 'Phoenix',
     pageTitle: 'Phoenix Budget',
     summary:
@@ -201,6 +213,222 @@ const cityBudgetData = [
       { label: '2023', total: 7.03, populationMil: 1.624, shares: [23, 34, 15, 9, 19] },
       { label: '2024', total: 8.03, populationMil: 1.650, shares: [23, 34, 15, 9, 19] },
       { label: '2025', total: 8.86, populationMil: 1.671, shares: [23, 34, 15, 9, 19] },
+    ],
+  },
+  {
+    slug: 'tokyo',
+    city: 'Tokyo',
+    state: 'Japan',
+    currencyPrefix: 'JPY ',
+    budgetUnit: 'T',
+    shortLabel: 'Tokyo',
+    pageTitle: 'Tokyo Budget',
+    summary:
+      'Tokyo Metropolitan Government runs one of the world’s largest city-scale budgets, with major weight in welfare, infrastructure, schools, disaster readiness, and metropolitan administration.',
+    fiscalNote:
+      'Tokyo budgets are usually discussed by Japanese fiscal year. The atlas maps each budget to its ending calendar year, so 2025 corresponds to FY2024-25.',
+    budgetBasis:
+      'Totals are rough Tokyo Metropolitan Government general-account budget levels in trillions of yen, simplified into five comparison buckets.',
+    colors: ['#7b2d1b', '#b65d35', '#df9955', '#3f7589', '#243247'],
+    categories: [
+      'Health, welfare & housing',
+      'Transport, infrastructure & resilience',
+      'Education, culture & youth',
+      'Police, fire & disaster response',
+      'Administration, debt & metro-wide ops',
+    ],
+    sourceTrail: [
+      'Tokyo Metropolitan Government annual budget outlines and fiscal materials',
+      '2024 and 2025 follow official headline totals reported for the metropolitan general account',
+      'Category shares are rounded after grouping large bureau-level appropriations',
+    ],
+    years: [
+      { label: '2020', total: 7.35, populationMil: 13.97, shares: [28, 24, 14, 12, 22] },
+      { label: '2021', total: 7.45, populationMil: 13.98, shares: [29, 23, 14, 12, 22] },
+      { label: '2022', total: 7.80, populationMil: 14.00, shares: [29, 23, 14, 12, 22] },
+      { label: '2023', total: 8.04, populationMil: 14.04, shares: [30, 23, 13, 12, 22] },
+      { label: '2024', total: 8.45, populationMil: 14.08, shares: [30, 23, 13, 12, 22] },
+      { label: '2025', total: 9.16, populationMil: 14.11, shares: [31, 22, 13, 12, 22] },
+    ],
+  },
+  {
+    slug: 'kyoto',
+    city: 'Kyoto',
+    state: 'Japan',
+    currencyPrefix: 'JPY ',
+    budgetUnit: 'T',
+    shortLabel: 'Kyoto',
+    pageTitle: 'Kyoto Budget',
+    summary:
+      'Kyoto’s budget mixes tourism-linked city services with transit, welfare, schools, climate work, and the fiscal pressure of maintaining an older urban fabric.',
+    fiscalNote:
+      'Kyoto City budgets are mapped by their ending fiscal year, so the 2025 row corresponds to the FY2024-25 budget cycle.',
+    budgetBasis:
+      'Totals are rough Kyoto City budget levels in trillions of yen, normalized from city budget summaries into five broad service categories.',
+    colors: ['#8c341b', '#c46d36', '#e6a960', '#3a7d78', '#2a3247'],
+    categories: [
+      'Health, welfare & community support',
+      'Transit, streets & urban maintenance',
+      'Education, culture & tourism',
+      'Climate, environment & disaster readiness',
+      'Administration, debt & citywide ops',
+    ],
+    sourceTrail: [
+      'Kyoto City annual budget overview materials and fiscal summaries',
+      'The totals are directional headline budget levels rather than an audited spending base',
+      'Category shares are rounded to keep Kyoto comparable with larger atlas cities',
+    ],
+    years: [
+      { label: '2020', total: 0.99, populationMil: 1.46, shares: [31, 22, 14, 9, 24] },
+      { label: '2021', total: 1.02, populationMil: 1.46, shares: [32, 21, 13, 9, 25] },
+      { label: '2022', total: 1.04, populationMil: 1.45, shares: [32, 21, 13, 9, 25] },
+      { label: '2023', total: 1.08, populationMil: 1.45, shares: [32, 21, 13, 9, 25] },
+      { label: '2024', total: 1.10, populationMil: 1.44, shares: [33, 20, 13, 9, 25] },
+      { label: '2025', total: 1.12, populationMil: 1.43, shares: [33, 20, 13, 9, 25] },
+    ],
+  },
+  {
+    slug: 'vancouver',
+    city: 'Vancouver',
+    state: 'British Columbia, Canada',
+    currencyPrefix: 'C$',
+    budgetUnit: 'B',
+    shortLabel: 'Vancouver',
+    pageTitle: 'Vancouver Budget',
+    summary:
+      'Vancouver’s operating budget reflects policing, engineering, parks, housing pressure, and rising utility and climate-resilience costs.',
+    fiscalNote:
+      'Vancouver budget books often separate operating, capital, and utility plans. The atlas uses rough operating-budget headline totals labeled by calendar year.',
+    budgetBasis:
+      'Totals are rough City of Vancouver operating-budget levels in billions of Canadian dollars, grouped into five broad service buckets.',
+    colors: ['#7f311c', '#ba6332', '#e1a55f', '#3e768a', '#283449'],
+    categories: [
+      'Police, fire & public safety',
+      'Engineering, utilities & climate resilience',
+      'Housing, planning & community services',
+      'Parks, recreation & libraries',
+      'Administration, debt & other ops',
+    ],
+    sourceTrail: [
+      'City of Vancouver annual operating budget pages, presentations, and council reports',
+      '2024 and 2025 use official budget figures published by the city; earlier years are rough headline operating totals',
+      'Bucket shares are rounded after grouping operating departments and utilities support',
+    ],
+    years: [
+      { label: '2020', total: 1.62, populationMil: 0.66, shares: [23, 27, 18, 12, 20] },
+      { label: '2021', total: 1.60, populationMil: 0.67, shares: [23, 27, 18, 12, 20] },
+      { label: '2022', total: 1.74, populationMil: 0.68, shares: [23, 28, 18, 12, 19] },
+      { label: '2023', total: 1.97, populationMil: 0.68, shares: [23, 28, 18, 12, 19] },
+      { label: '2024', total: 2.20, populationMil: 0.69, shares: [22, 29, 18, 12, 19] },
+      { label: '2025', total: 2.34, populationMil: 0.70, shares: [22, 29, 18, 12, 19] },
+    ],
+  },
+  {
+    slug: 'lisbon',
+    city: 'Lisbon',
+    state: 'Portugal',
+    currencyPrefix: 'EUR ',
+    budgetUnit: 'B',
+    shortLabel: 'Lisbon',
+    pageTitle: 'Lisbon Budget',
+    summary:
+      'Lisbon combines urban mobility, housing pressure, sanitation, public-space investment, and social support in a relatively compact municipal budget.',
+    fiscalNote:
+      'Lisbon budgets are shown by calendar year. The atlas uses rough municipal headline budgets for 2020 through 2025.',
+    budgetBasis:
+      'Totals are rough Lisbon municipal budget levels in billions of euros, simplified into five broad civic spending buckets.',
+    colors: ['#8f391d', '#c97238', '#ebb367', '#3b7b73', '#2a3348'],
+    categories: [
+      'Housing, social support & public health',
+      'Mobility, sanitation & public space',
+      'Urban development & climate works',
+      'Culture, education & neighborhood life',
+      'Administration, debt & citywide ops',
+    ],
+    sourceTrail: [
+      'Lisbon municipal budget presentations and annual city budget announcements',
+      'The yearly totals are rough headline budget levels rather than a harmonized audited series',
+      'Category shares are rounded to make Lisbon readable alongside much larger cities',
+    ],
+    years: [
+      { label: '2020', total: 1.05, populationMil: 0.55, shares: [24, 24, 18, 12, 22] },
+      { label: '2021', total: 1.14, populationMil: 0.55, shares: [24, 24, 18, 12, 22] },
+      { label: '2022', total: 1.21, populationMil: 0.55, shares: [25, 24, 18, 12, 21] },
+      { label: '2023', total: 1.29, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
+      { label: '2024', total: 1.35, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
+      { label: '2025', total: 1.47, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
+    ],
+  },
+  {
+    slug: 'london',
+    city: 'London',
+    state: 'United Kingdom',
+    currencyPrefix: 'GBP ',
+    budgetUnit: 'B',
+    shortLabel: 'London',
+    pageTitle: 'London Budget',
+    summary:
+      'The Greater London Authority group budget is dominated by transport, policing, fire, housing and major capital investment across the capital.',
+    fiscalNote:
+      'London budget cycles span two calendar years. The atlas labels each budget by its ending year, so 2025 corresponds to the 2024-25 cycle.',
+    budgetBasis:
+      'Totals are rough Greater London Authority group-budget levels in billions of pounds, normalized into five broad spending buckets.',
+    colors: ['#7a2c1a', '#b75b31', '#dd9b55', '#48738f', '#273247'],
+    categories: [
+      'Transport for London & mobility',
+      'Police, fire & resilience',
+      'Housing, regeneration & environment',
+      'Economic development & community services',
+      'Administration, debt & capital financing',
+    ],
+    sourceTrail: [
+      'Greater London Authority draft and final consolidated budget documents',
+      '2024 and 2025 follow official GLA group expenditure headlines; earlier years are rough consolidated-budget levels',
+      'Category shares are hand-grouped from major functional bodies for comparability',
+    ],
+    years: [
+      { label: '2020', total: 17.4, populationMil: 8.96, shares: [43, 17, 11, 6, 23] },
+      { label: '2021', total: 19.3, populationMil: 8.98, shares: [44, 16, 11, 6, 23] },
+      { label: '2022', total: 19.0, populationMil: 8.93, shares: [43, 17, 11, 6, 23] },
+      { label: '2023', total: 19.4, populationMil: 8.89, shares: [43, 17, 11, 6, 23] },
+      { label: '2024', total: 20.7, populationMil: 8.87, shares: [42, 17, 12, 6, 23] },
+      { label: '2025', total: 20.4, populationMil: 8.90, shares: [42, 17, 12, 6, 23] },
+    ],
+  },
+  {
+    slug: 'paris',
+    city: 'Paris',
+    state: 'France',
+    currencyPrefix: 'EUR ',
+    budgetUnit: 'B',
+    shortLabel: 'Paris',
+    pageTitle: 'Paris Budget',
+    summary:
+      'Paris combines large social-service and public-space obligations with transport support, climate adaptation, schooling, culture, and debt-heavy capital investment.',
+    fiscalNote:
+      'Paris budget documents distinguish operating and investment sections. The atlas uses rough annual total expenditure levels labeled by calendar year.',
+    budgetBasis:
+      'Totals are rough City of Paris budget levels in billions of euros, combining operating and investment spending into five broad comparison buckets.',
+    colors: ['#84321c', '#bf6535', '#e4a65e', '#3e7a78', '#283347'],
+    categories: [
+      'Social solidarity, housing & health',
+      'Streets, mobility & climate adaptation',
+      'Schools, culture & youth',
+      'Safety, sanitation & neighborhood services',
+      'Administration, debt & capital financing',
+    ],
+    sourceTrail: [
+      'Ville de Paris budget primitif materials and annual council budget presentations',
+      '2023 through 2025 align with published budget-expenditure headlines; 2020 through 2022 are rough totals built from official budget sections',
+      'Category shares are normalized from major policy blocks and financing items',
+    ],
+    years: [
+      { label: '2020', total: 9.75, populationMil: 2.15, shares: [25, 17, 15, 12, 31] },
+      { label: '2021', total: 9.85, populationMil: 2.15, shares: [25, 17, 15, 12, 31] },
+      { label: '2022', total: 10.0, populationMil: 2.14, shares: [25, 18, 15, 12, 30] },
+      { label: '2023', total: 10.4, populationMil: 2.13, shares: [25, 18, 15, 12, 30] },
+      { label: '2024', total: 11.0, populationMil: 2.11, shares: [25, 18, 15, 12, 30] },
+      { label: '2025', total: 11.0, populationMil: 2.10, shares: [25, 18, 15, 12, 30] },
     ],
   },
 ];

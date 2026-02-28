@@ -1,4 +1,4 @@
-const cityBudgetData = [
+const cityBudgetSeedData = [
   {
     slug: 'san-francisco',
     city: 'San Francisco',
@@ -432,5 +432,87 @@ const cityBudgetData = [
     ],
   },
 ];
+
+function clampShare(value) {
+  return Math.max(6, Math.min(42, value));
+}
+
+function roundShares(shares) {
+  const rounded = shares.map((value) => Math.round(value));
+  const total = rounded.reduce((sum, value) => sum + value, 0);
+  const diff = 100 - total;
+
+  if (diff !== 0) {
+    let targetIndex = 0;
+    for (let index = 1; index < rounded.length; index += 1) {
+      if (rounded[index] > rounded[targetIndex]) {
+        targetIndex = index;
+      }
+    }
+
+    rounded[targetIndex] += diff;
+  }
+
+  return rounded;
+}
+
+function interpolateShares(baseShares, progress, directionBias) {
+  const adjusted = baseShares.map((share, index) => {
+    const variance = ((index % 2 === 0 ? -1 : 1) * directionBias * progress) / 2;
+    return clampShare(share + variance);
+  });
+
+  return roundShares(adjusted);
+}
+
+function buildHistoricalYears(city) {
+  const anchorStart = city.years[0];
+  const anchorEnd = city.years[city.years.length - 1];
+  const totalGrowth = anchorEnd.total / anchorStart.total;
+  const historicalYears = [];
+
+  for (let year = 2019; year >= 2000; year -= 1) {
+    const distance = 2020 - year;
+    const decay = Math.pow(totalGrowth, 0.32 * distance);
+    const total = anchorStart.total / decay;
+    const populationDelta = anchorStart.populationMil - anchorEnd.populationMil;
+    const populationMil = anchorStart.populationMil + (populationDelta / 5) * distance;
+    const progress = distance / 20;
+    const shares = interpolateShares(
+      anchorStart.shares,
+      progress,
+      city.shareTrendBias || 1.2
+    );
+
+    historicalYears.push({
+      label: String(year),
+      total: Number(total.toFixed(2)),
+      populationMil: Number(populationMil.toFixed(3)),
+      shares,
+      estimated: true,
+    });
+  }
+
+  return historicalYears.reverse();
+}
+
+function expandCityYears(city) {
+  const historicalYears = buildHistoricalYears(city);
+  const anchorYears = city.years.map((year) => ({
+    ...year,
+    estimated: false,
+  }));
+
+  return {
+    ...city,
+    sourceTrail: [
+      ...city.sourceTrail,
+      '2000-2019 rows are smooth historical estimates backcast from the published 2020-2025 anchors in this atlas.',
+    ],
+    years: [...historicalYears, ...anchorYears],
+  };
+}
+
+const cityBudgetData = cityBudgetSeedData.map(expandCityYears);
 
 window.cityBudgetData = cityBudgetData;

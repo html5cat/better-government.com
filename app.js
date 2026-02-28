@@ -72,8 +72,9 @@ function renderCityCards() {
 
   cityGrid.innerHTML = cityData
     .map((city) => {
+      const sortedYears = [...city.years].sort((left, right) => Number(right.label) - Number(left.label));
       const firstYear = city.years[0];
-      const latestYear = city.years[city.years.length - 1];
+      const latestYear = sortedYears[0];
       const growth = ((latestYear.total - firstYear.total) / firstYear.total) * 100;
       const topShare = Math.max(...latestYear.shares);
       const topCategory = city.categories[latestYear.shares.indexOf(topShare)];
@@ -89,7 +90,7 @@ function renderCityCards() {
               <dd>${formatBudget(latestYear.total, city)}</dd>
             </div>
             <div>
-              <dt>2020-2025 change</dt>
+              <dt>2000-2025 change</dt>
               <dd>${formatDelta(growth)}</dd>
             </div>
             <div>

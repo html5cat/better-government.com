@@ -43,6 +43,64 @@ function buildCityNav() {
   `;
 }
 
+function buildLinePath(values, width, height, padding) {
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const xStep = values.length > 1 ? (width - padding * 2) / (values.length - 1) : 0;
+  const yRange = max - min || 1;
+
+  return values
+    .map((value, index) => {
+      const x = padding + xStep * index;
+      const y = height - padding - ((value - min) / yRange) * (height - padding * 2);
+      return `${index === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
+    })
+    .join(' ');
+}
+
+function buildAreaPath(values, width, height, padding) {
+  const linePath = buildLinePath(values, width, height, padding);
+  const xStep = values.length > 1 ? (width - padding * 2) / (values.length - 1) : 0;
+  const endX = padding + xStep * (values.length - 1);
+
+  return `${linePath} L ${endX.toFixed(2)} ${(height - padding).toFixed(2)} L ${padding.toFixed(2)} ${(height - padding).toFixed(2)} Z`;
+}
+
+function buildSparkChart(city, years, valueAccessor, options) {
+  const width = 560;
+  const height = 220;
+  const padding = 24;
+  const values = years.map(valueAccessor);
+  const linePath = buildLinePath(values, width, height, padding);
+  const areaPath = buildAreaPath(values, width, height, padding);
+  const startLabel = years[0].label;
+  const endLabel = years[years.length - 1].label;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+
+  return `
+    <article class="chart-card reveal">
+      <div class="chart-card__header">
+        <div>
+          <p class="eyebrow">${options.kicker}</p>
+          <h2>${options.title}</h2>
+        </div>
+        <p class="chart-card__range">${options.format(max)} high · ${options.format(min)} low</p>
+      </div>
+      <svg class="chart-card__svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${options.title} from ${startLabel} to ${endLabel}">
+        <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" class="chart-axis" />
+        <path d="${areaPath}" class="chart-area" style="fill:${options.fill}" />
+        <path d="${linePath}" class="chart-line" style="stroke:${options.stroke}" />
+      </svg>
+      <div class="chart-card__footer">
+        <span>${startLabel}</span>
+        <strong>${options.format(values[values.length - 1])}</strong>
+        <span>${endLabel}</span>
+      </div>
+    </article>
+  `;
+}
+
 function renderCityPage() {
   const pageRoot = document.querySelector('#city-page');
   const navRoot = document.querySelector('.site-nav');
@@ -65,8 +123,10 @@ function renderCityPage() {
     return;
   }
 
-  const firstYear = city.years[0];
-  const latestYear = city.years[city.years.length - 1];
+  const chronologicalYears = [...city.years].sort((left, right) => Number(left.label) - Number(right.label));
+  const reverseChronologicalYears = [...chronologicalYears].reverse();
+  const firstYear = chronologicalYears[0];
+  const latestYear = chronologicalYears[chronologicalYears.length - 1];
   const growth = ((latestYear.total - firstYear.total) / firstYear.total) * 100;
   const largestShare = Math.max(...latestYear.shares);
   const largestCategory = city.categories[latestYear.shares.indexOf(largestShare)];
@@ -84,7 +144,7 @@ function renderCityPage() {
         <div class="city-hero__chips">
           <span class="chip">2025 total ${atlasHelpers.formatBudget(latestYear.total, city)}</span>
           <span class="chip">2025 per resident ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)}</span>
-          <span class="chip">2020-2025 change ${growth > 0 ? '+' : ''}${growth.toFixed(1)}%</span>
+          <span class="chip">2000-2025 change ${growth > 0 ? '+' : ''}${growth.toFixed(1)}%</span>
           <span class="chip">Largest 2025 bucket ${largestCategory}</span>
         </div>
       </div>
@@ -95,17 +155,44 @@ function renderCityPage() {
       </aside>
     </section>
 
+    <section class="chart-grid">
+      ${buildSparkChart(
+        city,
+        chronologicalYears,
+        (year) => year.total,
+        {
+          kicker: 'Budget Trend',
+          title: 'Total budget, 2000-2025',
+          stroke: city.colors[0],
+          fill: 'rgba(159, 77, 39, 0.14)',
+          format: (value) => atlasHelpers.formatBudget(value, city),
+        }
+      )}
+      ${buildSparkChart(
+        city,
+        chronologicalYears,
+        (year) => (year.total * (city.budgetUnit === 'T' ? 1000000 : 1000)) / year.populationMil,
+        {
+          kicker: 'Resident Scale',
+          title: 'Per resident, 2000-2025',
+          stroke: city.colors[3],
+          fill: 'rgba(47, 127, 118, 0.14)',
+          format: (value) => `${city.currencyPrefix}${Math.round(value).toLocaleString()}`,
+        }
+      )}
+    </section>
+
     <section class="section-block">
       <div class="section-heading reveal">
         <p class="eyebrow">Timeline</p>
-        <h2>Budget cycles from 2020 through 2025.</h2>
+        <h2>Budget cycles from 2000 through 2025.</h2>
         <p>
           Each row shows the total city budget for the year and a rough split across
-          five high-level categories.
+          five high-level categories. Rows are shown in reverse chronological order.
         </p>
       </div>
       <div class="timeline-grid">
-        ${city.years
+        ${reverseChronologicalYears
           .map(
             (year) => `
               <article class="timeline-card reveal">
@@ -113,7 +200,7 @@ function renderCityPage() {
                   <div>
                     <p class="timeline-card__year">${year.label}</p>
                     <h3>${atlasHelpers.formatBudget(year.total, city)}</h3>
-                    <p class="timeline-card__meta">${atlasHelpers.formatPerResident(year.total, year.populationMil, city)} per resident · ${atlasHelpers.formatPopulation(year.populationMil)}</p>
+                    <p class="timeline-card__meta">${atlasHelpers.formatPerResident(year.total, year.populationMil, city)} per resident · ${atlasHelpers.formatPopulation(year.populationMil)}${year.estimated ? ' · estimated' : ''}</p>
                   </div>
                   <span class="timeline-card__share">${Math.max(...year.shares)}% top share</span>
                 </div>
@@ -135,10 +222,10 @@ function renderCityPage() {
         <p class="eyebrow">Readout</p>
         <h2>What stands out in this city.</h2>
         <ul class="bullet-list">
-          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total, city)} in 2020 to ${atlasHelpers.formatBudget(latestYear.total, city)} in 2025.</li>
+          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total, city)} in 2000 to ${atlasHelpers.formatBudget(latestYear.total, city)} in 2025.</li>
           <li>Estimated spending per resident moved from ${atlasHelpers.formatPerResident(firstYear.total, firstYear.populationMil, city)} to ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)} over the same span.</li>
           <li>${largestCategory} is the biggest normalized category in the latest year at ${largestShare}%.</li>
-          <li>The mix is rounded so readers can compare broad civic priorities without wading through hundreds of budget line items.</li>
+          <li>The mix is rounded, and pre-2020 rows are backfilled estimates anchored to the published 2020-2025 series used by this atlas.</li>
         </ul>
       </div>
       <div class="detail-panel reveal">

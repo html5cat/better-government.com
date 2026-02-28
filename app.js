@@ -13,6 +13,15 @@ function formatDelta(value) {
   return `${sign}${value.toFixed(1)}%`;
 }
 
+function formatPerResident(total, populationMil) {
+  const dollars = (total * 1000) / populationMil;
+  return `$${Math.round(dollars).toLocaleString()}`;
+}
+
+function formatPopulation(populationMil) {
+  return `${populationMil.toFixed(2)}M residents`;
+}
+
 function revealElements() {
   const revealTargets = document.querySelectorAll('.reveal');
 
@@ -75,6 +84,10 @@ function renderCityCards() {
               <dd>${formatDelta(growth)}</dd>
             </div>
             <div>
+              <dt>2025 per resident</dt>
+              <dd>${formatPerResident(latestYear.total, latestYear.populationMil)}</dd>
+            </div>
+            <div>
               <dt>Largest 2025 bucket</dt>
               <dd>${topCategory}</dd>
             </div>
@@ -91,5 +104,7 @@ revealElements();
 
 window.BudgetAtlas = {
   formatBudget,
+  formatPerResident,
+  formatPopulation,
   revealElements,
 };

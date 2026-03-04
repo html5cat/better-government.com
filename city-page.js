@@ -45,6 +45,7 @@ function buildCityNav() {
   return `
     <a href="../index.html#cities">All Cities</a>
     <a href="../index.html#method">Method</a>
+    <a href="#next-steps">Next Steps</a>
   `;
 }
 
@@ -356,6 +357,46 @@ function renderCityPage() {
         <ul class="bullet-list">
           ${city.sourceTrail.map((item) => `<li>${item}</li>`).join('')}
         </ul>
+      </div>
+    </section>
+
+    <section id="next-steps" class="section-block reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Best Next Steps</p>
+        <h2>Where to push the analysis next for ${city.city}.</h2>
+        <p>
+          Use this page to identify the budget questions that deserve a closer pass in
+          the official budget documents.
+        </p>
+      </div>
+      <div class="next-steps-grid">
+        <article class="next-step-card">
+          <p class="panel-kicker">1. Start With The 2025 Leader</p>
+          <h3>Pressure-test ${largestCategory} first.</h3>
+          <p>
+            It is the biggest 2025 bucket at ${largestShare}% of the rough mix, so this
+            is usually the fastest place to check whether long-run growth is structural
+            or temporary.
+          </p>
+        </article>
+        <article class="next-step-card">
+          <p class="panel-kicker">2. Compare 2000 vs 2025</p>
+          <h3>Separate long-run growth from short-term spikes.</h3>
+          <p>
+            Use the top charts and reverse-chronological timeline to see whether
+            spending changes came gradually over decades or accelerated only in the most
+            recent budget cycles.
+          </p>
+        </article>
+        <article class="next-step-card">
+          <p class="panel-kicker">3. Confirm Exact Line Items</p>
+          <h3>Use the source trail before making policy claims.</h3>
+          <p>
+            This atlas compresses budgets into broad buckets. The next step is checking
+            the cited city budget materials for department-level appropriations,
+            capital-only items, and one-time transfers.
+          </p>
+        </article>
       </div>
     </section>
   `;

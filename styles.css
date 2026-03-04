@@ -353,6 +353,31 @@ main {
   margin-bottom: 1.25rem;
 }
 
+.next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.next-step-card {
+  border-radius: var(--radius-lg);
+  background: rgba(255, 252, 247, 0.9);
+  border: 1px solid rgba(41, 47, 61, 0.1);
+  box-shadow: var(--shadow-md);
+  padding: 1.2rem;
+}
+
+.next-step-card h3 {
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.next-step-card p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .city-grid,
 .timeline-grid {
   display: grid;
@@ -534,6 +559,7 @@ main {
   .city-hero,
   .section-block--split,
   .chart-grid,
+  .next-steps-grid,
   .city-grid,
   .timeline-grid,
   .site-footer {

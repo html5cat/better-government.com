@@ -142,68 +142,6 @@ function renderCityCards() {
     .join('');
 }
 
-function projectToMap(lat, lon, width, height) {
-  const x = ((lon + 180) / 360) * width;
-  const y = ((90 - lat) / 180) * height;
-  return { x, y };
-}
-
-function renderCityMap() {
-  const mapPointLayer = document.querySelector('#city-map-points');
-  const mapLinks = document.querySelector('#city-map-links');
-
-  if ((!mapPointLayer && !mapLinks) || cityData.length === 0) {
-    return;
-  }
-
-  const mapWidth = 1000;
-  const mapHeight = 480;
-  const labelOffsets = {
-    'new-york': { x: 12, y: -12 },
-    philadelphia: { x: 12, y: 14 },
-    london: { x: 10, y: -10 },
-    paris: { x: 10, y: 14 },
-    tokyo: { x: -56, y: -12 },
-    kyoto: { x: -58, y: 14 },
-  };
-
-  if (mapPointLayer) {
-    mapPointLayer.innerHTML = cityData
-      .map((city) => {
-        if (typeof city.lat !== 'number' || typeof city.lon !== 'number') {
-          return '';
-        }
-
-        const { x, y } = projectToMap(city.lat, city.lon, mapWidth, mapHeight);
-        const offset = labelOffsets[city.slug] || { x: 10, y: -10 };
-        const labelX = x + offset.x;
-        const labelY = y + offset.y;
-
-        return `
-          <a href="cities/${city.slug}.html" class="map-city-link" aria-label="${city.city}, ${city.state}">
-            <title>${city.city}, ${city.state}</title>
-            <circle class="map-city-dot" cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="6"></circle>
-            <text class="map-city-label" x="${labelX.toFixed(2)}" y="${labelY.toFixed(2)}">${city.shortLabel}</text>
-          </a>
-        `;
-      })
-      .join('');
-  }
-
-  if (mapLinks) {
-    mapLinks.innerHTML = cityData
-      .map(
-        (city) => `
-          <li>
-            <a href="cities/${city.slug}.html">${city.city}, ${city.state}</a>
-          </li>
-        `
-      )
-      .join('');
-  }
-}
-
-renderCityMap();
 renderCityCards();
 revealElements();
 

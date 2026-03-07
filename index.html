@@ -24,7 +24,6 @@
         <span>City Budget Atlas</span>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a href="#map">Map</a>
         <a href="#cities">Cities</a>
         <a href="#method">Method</a>
         <a href="#next-steps">Next Steps</a>
@@ -32,47 +31,6 @@
     </header>
 
     <main>
-      <section id="map" class="map-panel reveal">
-        <div class="map-panel__copy">
-          <p class="eyebrow">City Map</p>
-          <h2>Jump straight to any city in the atlas.</h2>
-          <p>
-            Use the map markers to open a city page directly, or pick from the linked
-            list if you prefer a text view.
-          </p>
-          <ul id="city-map-links" class="map-links"></ul>
-        </div>
-        <div class="map-panel__canvas">
-          <svg class="world-map" viewBox="0 0 1000 480" role="img" aria-label="World map with city links">
-            <defs>
-              <linearGradient id="oceanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#eef5ff" />
-                <stop offset="100%" stop-color="#ddeaf6" />
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="1000" height="480" fill="url(#oceanGradient)" />
-            <g class="world-map__grid">
-              <line x1="0" y1="120" x2="1000" y2="120"></line>
-              <line x1="0" y1="240" x2="1000" y2="240"></line>
-              <line x1="0" y1="360" x2="1000" y2="360"></line>
-              <line x1="200" y1="0" x2="200" y2="480"></line>
-              <line x1="400" y1="0" x2="400" y2="480"></line>
-              <line x1="600" y1="0" x2="600" y2="480"></line>
-              <line x1="800" y1="0" x2="800" y2="480"></line>
-            </g>
-            <g class="world-map__land">
-              <path d="M78 116L161 89L218 95L275 136L300 186L266 230L208 250L166 228L125 188L81 138Z"></path>
-              <path d="M244 258L299 280L320 334L304 399L268 453L228 427L218 353Z"></path>
-              <path d="M419 132L494 115L565 145L556 195L508 214L436 206L405 168Z"></path>
-              <path d="M496 210L543 231L569 290L546 366L488 406L455 342L456 271Z"></path>
-              <path d="M561 160L650 131L762 151L845 207L825 261L736 286L664 266L598 225Z"></path>
-              <path d="M763 314L834 323L875 365L850 402L776 405L741 359Z"></path>
-            </g>
-            <g id="city-map-points" class="world-map__points"></g>
-          </svg>
-        </div>
-      </section>
-
       <section class="hero-block reveal">
         <div class="hero-block__copy">
           <p class="eyebrow">2000-2025 Civic Budget Atlas</p>

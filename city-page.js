@@ -181,6 +181,38 @@ function buildXAxisTicks(years, geometry) {
     .join('');
 }
 
+function buildPointMarkers(city, years, values, maxValue, geometry, options) {
+  return years
+    .map((year, index) => {
+      const x = getXCoordinate(index, years.length, geometry);
+      const y = getYCoordinate(values[index], maxValue, geometry);
+      const exactValue = options.exactFormat(values[index], year);
+
+      return `
+        <g class="chart-point-group">
+          <line
+            x1="${x.toFixed(2)}"
+            y1="${geometry.top}"
+            x2="${x.toFixed(2)}"
+            y2="${(geometry.top + geometry.plotHeight).toFixed(2)}"
+            class="chart-hover-line"
+          />
+          <circle
+            cx="${x.toFixed(2)}"
+            cy="${y.toFixed(2)}"
+            r="5"
+            class="chart-point"
+            tabindex="0"
+            data-year="${year.label}"
+            data-value="${exactValue.replace(/"/g, '&quot;')}"
+            aria-label="${year.label}: ${exactValue}"
+          ></circle>
+        </g>
+      `;
+    })
+    .join('');
+}
+
 function buildSparkChart(city, years, valueAccessor, options) {
   const width = 560;
   const height = 260;
@@ -192,6 +224,7 @@ function buildSparkChart(city, years, valueAccessor, options) {
   const linePath = buildLinePath(values, yAxis.niceMax, geometry);
   const areaPath = buildAreaPath(values, yAxis.niceMax, geometry);
   const xAxisTicks = buildXAxisTicks(years, geometry);
+  const pointMarkers = buildPointMarkers(city, years, values, yAxis.niceMax, geometry, options);
   const startLabel = years[0].label;
   const endLabel = years[years.length - 1].label;
   const axisY = geometry.top + geometry.plotHeight;
@@ -211,8 +244,10 @@ function buildSparkChart(city, years, valueAccessor, options) {
         <line x1="${geometry.left}" y1="${axisY}" x2="${(geometry.left + geometry.plotWidth).toFixed(2)}" y2="${axisY}" class="chart-axis" />
         <path d="${areaPath}" class="chart-area" style="fill:${options.fill}" />
         <path d="${linePath}" class="chart-line" style="stroke:${options.stroke}" />
+        ${pointMarkers}
         ${xAxisTicks}
       </svg>
+      <div class="chart-tooltip" aria-hidden="true"></div>
       <div class="chart-card__footer">
         <span>${startLabel}</span>
         <strong>${options.format(values[values.length - 1])}</strong>
@@ -220,6 +255,54 @@ function buildSparkChart(city, years, valueAccessor, options) {
       </div>
     </article>
   `;
+}
+
+function positionChartTooltip(card, tooltip, point, clientX) {
+  const cardRect = card.getBoundingClientRect();
+  const pointRect = point.getBoundingClientRect();
+  const fallbackX = pointRect.left + pointRect.width / 2;
+  const relativeX = (clientX || fallbackX) - cardRect.left;
+  const relativeY = pointRect.top - cardRect.top;
+  const tooltipWidth = tooltip.offsetWidth;
+  const clampedX = Math.min(
+    Math.max(relativeX - tooltipWidth / 2, 12),
+    cardRect.width - tooltipWidth - 12
+  );
+  const tooltipY = Math.max(relativeY - tooltip.offsetHeight - 14, 12);
+
+  tooltip.style.left = `${clampedX}px`;
+  tooltip.style.top = `${tooltipY}px`;
+}
+
+function attachChartTooltips() {
+  const chartCards = document.querySelectorAll('.chart-card');
+
+  chartCards.forEach((card) => {
+    const tooltip = card.querySelector('.chart-tooltip');
+    const points = card.querySelectorAll('.chart-point');
+
+    if (!tooltip || points.length === 0) {
+      return;
+    }
+
+    const hideTooltip = () => {
+      tooltip.classList.remove('is-visible');
+    };
+
+    points.forEach((point) => {
+      const showTooltip = (event) => {
+        tooltip.textContent = `${point.dataset.year}: ${point.dataset.value}`;
+        tooltip.classList.add('is-visible');
+        positionChartTooltip(card, tooltip, point, event?.clientX);
+      };
+
+      point.addEventListener('mouseenter', showTooltip);
+      point.addEventListener('mousemove', showTooltip);
+      point.addEventListener('focus', showTooltip);
+      point.addEventListener('mouseleave', hideTooltip);
+      point.addEventListener('blur', hideTooltip);
+    });
+  });
 }
 
 function renderCityPage() {
@@ -288,6 +371,7 @@ function renderCityPage() {
           fill: 'rgba(159, 77, 39, 0.14)',
           format: (value) => atlasHelpers.formatBudget(value, city),
           axisFormat: (value) => formatLocalBudget(value, city),
+          exactFormat: (value) => atlasHelpers.formatBudget(value, city),
         }
       )}
       ${buildSparkChart(
@@ -301,6 +385,7 @@ function renderCityPage() {
           fill: 'rgba(47, 127, 118, 0.14)',
           format: (value) => `${city.currencyPrefix}${Math.round(value).toLocaleString()}`,
           axisFormat: (value) => formatCompactCurrency(value, city),
+          exactFormat: (value) => `${city.currencyPrefix}${Math.round(value).toLocaleString()}`,
         }
       )}
     </section>
@@ -404,6 +489,8 @@ function renderCityPage() {
   if (atlasHelpers.revealElements) {
     atlasHelpers.revealElements();
   }
+
+  attachChartTooltips();
 }
 
 renderCityPage();

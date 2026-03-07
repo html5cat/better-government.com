@@ -135,6 +135,107 @@ main {
   box-shadow: var(--shadow-lg);
 }
 
+.map-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.45fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 252, 247, 0.9);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.map-panel__copy {
+  padding: 0.5rem 0.4rem;
+}
+
+.map-panel__copy h2 {
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.map-panel__copy p {
+  color: var(--muted);
+}
+
+.map-links {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.map-links a {
+  text-decoration: none;
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.map-links a:hover,
+.map-links a:focus-visible {
+  text-decoration: underline;
+}
+
+.map-panel__canvas {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(41, 47, 61, 0.12);
+  background: #eef5ff;
+}
+
+.world-map {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  display: block;
+}
+
+.world-map__grid line {
+  stroke: rgba(54, 73, 102, 0.14);
+  stroke-width: 1;
+}
+
+.world-map__land path {
+  fill: rgba(132, 169, 142, 0.58);
+  stroke: rgba(72, 108, 88, 0.25);
+  stroke-width: 1.4;
+}
+
+.map-city-link {
+  cursor: pointer;
+}
+
+.map-city-dot {
+  fill: var(--accent);
+  stroke: #fff8ef;
+  stroke-width: 2.5;
+  transition: transform 0.2s ease, fill 0.2s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.map-city-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  fill: #22324f;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.86);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.map-city-link:hover .map-city-dot,
+.map-city-link:focus-visible .map-city-dot {
+  fill: var(--teal);
+  transform: scale(1.16);
+}
+
 .hero-block__copy h1,
 .city-hero__copy h1,
 .section-heading h2,
@@ -270,6 +371,7 @@ main {
 }
 
 .chart-card {
+  position: relative;
   border-radius: var(--radius-lg);
   background: rgba(255, 252, 247, 0.9);
   border: 1px solid rgba(41, 47, 61, 0.1);
@@ -336,6 +438,62 @@ main {
 
 .chart-area {
   stroke: none;
+}
+
+.chart-hover-line {
+  stroke: rgba(31, 38, 51, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.chart-point {
+  fill: #fff9f1;
+  stroke: var(--surface-ink);
+  stroke-width: 2;
+  cursor: pointer;
+  transition: transform 0.18s ease, fill 0.18s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.chart-point:hover,
+.chart-point:focus-visible {
+  fill: var(--accent);
+  transform: scale(1.18);
+  outline: none;
+}
+
+.chart-point:hover + .chart-hover-line,
+.chart-point:focus-visible + .chart-hover-line {
+  opacity: 1;
+}
+
+.chart-point-group:hover .chart-hover-line,
+.chart-point-group:focus-within .chart-hover-line {
+  opacity: 1;
+}
+
+.chart-tooltip {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  padding: 0.55rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(31, 38, 51, 0.94);
+  color: #fff9f1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 14px 28px rgba(31, 38, 51, 0.22);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.chart-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .chart-card__footer {
@@ -555,6 +713,7 @@ main {
 }
 
 @media (max-width: 980px) {
+  .map-panel,
   .hero-block,
   .city-hero,
   .section-block--split,
@@ -580,6 +739,10 @@ main {
   .hero-block__copy h1,
   .city-hero__copy h1 {
     font-size: clamp(2.1rem, 12vw, 3rem);
+  }
+
+  .world-map {
+    min-height: 300px;
   }
 
   .timeline-card__header,

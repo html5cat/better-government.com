@@ -119,19 +119,19 @@ function renderCityCards() {
           <p class="city-card__summary">${city.summary}</p>
           <dl class="city-card__stats">
             <div>
-              <dt>2025 total</dt>
+              <dt>${latestYear.label} total</dt>
               <dd>${formatBudget(latestYear.total, city)}</dd>
             </div>
             <div>
-              <dt>2000-2025 change</dt>
+              <dt>${firstYear.label}-${latestYear.label} change</dt>
               <dd>${formatDelta(growth)}</dd>
             </div>
             <div>
-              <dt>2025 per resident</dt>
+              <dt>${latestYear.label} per resident</dt>
               <dd>${formatPerResident(latestYear.total, latestYear.populationMil, city)}</dd>
             </div>
             <div>
-              <dt>Largest 2025 bucket</dt>
+              <dt>Largest ${latestYear.label} bucket</dt>
               <dd>${topCategory}</dd>
             </div>
           </dl>

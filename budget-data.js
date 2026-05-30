@@ -23,7 +23,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'San Francisco Mayor budget books and annual appropriation materials',
-      '2020 maps to the FY2019-20 budget; 2025 maps to the FY2024-25 adopted budget',
+      '2020 maps to the FY2019-20 budget; 2026 maps to the FY2025-26 adopted budget',
       'Category shares are rounded after hand-grouping departments and citywide cost centers',
     ],
     years: [
@@ -33,6 +33,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 14.6, populationMil: 0.852, shares: [31, 17, 16, 11, 25] },
       { label: '2024', total: 15.3, populationMil: 0.844, shares: [31, 17, 15, 11, 26] },
       { label: '2025', total: 15.9, populationMil: 0.840, shares: [32, 17, 15, 10, 26] },
+      { label: '2026', total: 15.91, populationMil: 0.835, shares: [32, 17, 15, 10, 26] },
     ],
   },
   {
@@ -46,7 +47,7 @@ const cityBudgetSeedData = [
     summary:
       'The country’s largest city budget, with the heaviest weight in education, social services, labor costs, debt, and other citywide obligations.',
     fiscalNote:
-      'NYC uses fiscal years labeled by their end year, so FY2020 through FY2025 already match the 2020-2025 timeline shown here.',
+      'NYC uses fiscal years labeled by their end year, so FY2020 through FY2026 already match the 2020-2026 timeline shown here.',
     budgetBasis:
       'Totals reflect adopted city budgets in billions of dollars. Mix percentages are normalized from broad city service areas and citywide cost items.',
     colors: ['#9f4d27', '#d48a45', '#2f7f76', '#516f9c', '#2a2e42'],
@@ -58,7 +59,7 @@ const cityBudgetSeedData = [
       'Labor, debt & citywide ops',
     ],
     sourceTrail: [
-      'NYC Comptroller adopted budget comments for FY2020-FY2025',
+      'NYC Comptroller adopted budget comments for FY2020-FY2026',
       'NYC budget totals use official adopted-budget headline figures',
       'Category grouping is hand-normalized from agency and citywide spending sections',
     ],
@@ -69,6 +70,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 101.1, populationMil: 8.436, shares: [26, 18, 15, 13, 28] },
       { label: '2024', total: 107.1, populationMil: 8.404, shares: [27, 17, 15, 13, 28] },
       { label: '2025', total: 112.4, populationMil: 8.390, shares: [27, 17, 15, 12, 29] },
+      { label: '2026', total: 115.91, populationMil: 8.478, shares: [27, 17, 15, 12, 29] },
     ],
   },
   {
@@ -95,7 +97,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'Los Angeles City Administrative Officer budget summary booklets',
-      '2020 uses the FY2019-20 adopted figure; 2025 uses the FY2024-25 adopted figure',
+      '2020 uses the FY2019-20 adopted figure; 2026 uses the FY2025-26 adopted figure',
       'Breakdown percentages are rounded and normalized for comparison across years',
     ],
     years: [
@@ -105,6 +107,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 11.78, populationMil: 3.822, shares: [31, 20, 13, 13, 23] },
       { label: '2024', total: 13.15, populationMil: 3.808, shares: [30, 21, 14, 13, 22] },
       { label: '2025', total: 12.9, populationMil: 3.793, shares: [30, 21, 15, 12, 22] },
+      { label: '2026', total: 14.0, populationMil: 3.820, shares: [30, 21, 15, 12, 22] },
     ],
   },
   {
@@ -130,7 +133,7 @@ const cityBudgetSeedData = [
       'Administration, labor & other ops',
     ],
     sourceTrail: [
-      'City of Chicago annual budget books and budget-overview materials for 2020-2025',
+      'City of Chicago annual budget books and budget-overview materials for 2020-2026',
       'Totals are rough all-funds levels rather than a single audited spending base',
       'Category shares are hand-normalized to compare Chicago with other cities in the atlas',
     ],
@@ -141,6 +144,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 16.77, populationMil: 2.665, shares: [24, 23, 17, 15, 21] },
       { label: '2024', total: 16.62, populationMil: 2.640, shares: [24, 23, 17, 15, 21] },
       { label: '2025', total: 17.10, populationMil: 2.617, shares: [24, 24, 17, 14, 21] },
+      { label: '2026', total: 16.55, populationMil: 2.722, shares: [24, 24, 17, 14, 21] },
     ],
   },
   {
@@ -154,7 +158,7 @@ const cityBudgetSeedData = [
     summary:
       'Philadelphia’s budget emphasizes public safety, education-linked obligations, neighborhood services, housing and health programs, and labor reserves.',
     fiscalNote:
-      'Philadelphia uses fiscal years labeled by their end year, so FY2020 through FY2025 map directly to the 2020-2025 timeline shown here.',
+      'Philadelphia uses fiscal years labeled by their end year, so FY2020 through FY2026 map directly to the 2020-2026 timeline shown here.',
     budgetBasis:
       'Totals reflect rough city operating and capital budget levels in billions of dollars, simplified into five reader-friendly spending buckets.',
     colors: ['#8b3b1c', '#c66b33', '#e8ae63', '#3d7e78', '#2a3347'],
@@ -167,7 +171,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'City of Philadelphia budget highlights, five-year plans, and capital-program materials',
-      'FY2025 uses the city-approved One Philly budget level; earlier years are rough headline budget figures',
+      'FY2026 uses the city-approved One Philly 2.0 budget level; earlier years are rough headline budget figures',
       'Mix percentages are rounded to make Philadelphia comparable with the rest of the atlas',
     ],
     years: [
@@ -177,6 +181,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 5.94, populationMil: 1.568, shares: [29, 19, 12, 14, 26] },
       { label: '2024', total: 6.12, populationMil: 1.551, shares: [28, 20, 12, 14, 26] },
       { label: '2025', total: 6.37, populationMil: 1.547, shares: [28, 20, 12, 14, 26] },
+      { label: '2026', total: 6.80, populationMil: 1.568, shares: [28, 20, 12, 14, 26] },
     ],
   },
   {
@@ -202,7 +207,7 @@ const cityBudgetSeedData = [
       'Administration, solid waste & other ops',
     ],
     sourceTrail: [
-      'City of Phoenix Budget Library Schedule 1 operating-fund documents for FY2019-20 through FY2024-25',
+      'City of Phoenix Budget Library Schedule 1 operating-fund documents for FY2019-20 through FY2025-26',
       'The yearly totals here come from official operating-fund schedules rather than a separate atlas estimate',
       'Bucket shares are normalized from major fund and service clusters for readability',
     ],
@@ -213,6 +218,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 7.03, populationMil: 1.624, shares: [23, 34, 15, 9, 19] },
       { label: '2024', total: 8.03, populationMil: 1.650, shares: [23, 34, 15, 9, 19] },
       { label: '2025', total: 8.86, populationMil: 1.671, shares: [23, 34, 15, 9, 19] },
+      { label: '2026', total: 9.09, populationMil: 1.674, shares: [23, 34, 15, 9, 19] },
     ],
   },
   {
@@ -221,7 +227,7 @@ const cityBudgetSeedData = [
     state: 'Japan',
     currencyPrefix: 'JPY ',
     budgetUnit: 'T',
-    usdPerUnit: 0.00648,
+    usdPerUnit: 0.00628,
     shortLabel: 'Tokyo',
     pageTitle: 'Tokyo Budget',
     summary:
@@ -240,7 +246,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'Tokyo Metropolitan Government annual budget outlines and fiscal materials',
-      '2024 and 2025 follow official headline totals reported for the metropolitan general account',
+      '2024 through 2026 follow official headline totals reported for the metropolitan general account',
       'Category shares are rounded after grouping large bureau-level appropriations',
     ],
     years: [
@@ -250,6 +256,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 8.04, populationMil: 14.04, shares: [30, 23, 13, 12, 22] },
       { label: '2024', total: 8.45, populationMil: 14.08, shares: [30, 23, 13, 12, 22] },
       { label: '2025', total: 9.16, populationMil: 14.11, shares: [31, 22, 13, 12, 22] },
+      { label: '2026', total: 9.65, populationMil: 14.18, shares: [31, 22, 13, 12, 22] },
     ],
   },
   {
@@ -258,7 +265,7 @@ const cityBudgetSeedData = [
     state: 'Japan',
     currencyPrefix: 'JPY ',
     budgetUnit: 'T',
-    usdPerUnit: 0.00648,
+    usdPerUnit: 0.00628,
     shortLabel: 'Kyoto',
     pageTitle: 'Kyoto Budget',
     summary:
@@ -287,6 +294,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 1.08, populationMil: 1.45, shares: [32, 21, 13, 9, 25] },
       { label: '2024', total: 1.10, populationMil: 1.44, shares: [33, 20, 13, 9, 25] },
       { label: '2025', total: 1.12, populationMil: 1.43, shares: [33, 20, 13, 9, 25] },
+      { label: '2026', total: 1.01, populationMil: 1.43, shares: [33, 20, 13, 9, 25] },
     ],
   },
   {
@@ -295,7 +303,7 @@ const cityBudgetSeedData = [
     state: 'British Columbia, Canada',
     currencyPrefix: 'C$',
     budgetUnit: 'B',
-    usdPerUnit: 0.7376,
+    usdPerUnit: 0.7237,
     shortLabel: 'Vancouver',
     pageTitle: 'Vancouver Budget',
     summary:
@@ -314,7 +322,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'City of Vancouver annual operating budget pages, presentations, and council reports',
-      '2024 and 2025 use official budget figures published by the city; earlier years are rough headline operating totals',
+      '2024 through 2026 use official budget figures published by the city; earlier years are rough headline operating totals',
       'Bucket shares are rounded after grouping operating departments and utilities support',
     ],
     years: [
@@ -324,6 +332,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 1.97, populationMil: 0.68, shares: [23, 28, 18, 12, 19] },
       { label: '2024', total: 2.20, populationMil: 0.69, shares: [22, 29, 18, 12, 19] },
       { label: '2025', total: 2.34, populationMil: 0.70, shares: [22, 29, 18, 12, 19] },
+      { label: '2026', total: 2.39, populationMil: 0.70, shares: [22, 29, 18, 12, 19] },
     ],
   },
   {
@@ -332,7 +341,7 @@ const cityBudgetSeedData = [
     state: 'Portugal',
     currencyPrefix: 'EUR ',
     budgetUnit: 'B',
-    usdPerUnit: 1.1885,
+    usdPerUnit: 1.1603,
     shortLabel: 'Lisbon',
     pageTitle: 'Lisbon Budget',
     summary:
@@ -361,6 +370,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 1.29, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
       { label: '2024', total: 1.35, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
       { label: '2025', total: 1.47, populationMil: 0.54, shares: [25, 24, 18, 12, 21] },
+      { label: '2026', total: 1.35, populationMil: 0.55, shares: [25, 24, 18, 12, 21] },
     ],
   },
   {
@@ -369,7 +379,7 @@ const cityBudgetSeedData = [
     state: 'United Kingdom',
     currencyPrefix: 'GBP ',
     budgetUnit: 'B',
-    usdPerUnit: 1.3729,
+    usdPerUnit: 1.3439,
     shortLabel: 'London',
     pageTitle: 'London Budget',
     summary:
@@ -388,7 +398,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'Greater London Authority draft and final consolidated budget documents',
-      '2024 and 2025 follow official GLA group expenditure headlines; earlier years are rough consolidated-budget levels',
+      '2024 through 2026 follow official GLA group expenditure headlines; earlier years are rough consolidated-budget levels',
       'Category shares are hand-grouped from major functional bodies for comparability',
     ],
     years: [
@@ -398,6 +408,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 19.4, populationMil: 8.89, shares: [43, 17, 11, 6, 23] },
       { label: '2024', total: 20.7, populationMil: 8.87, shares: [42, 17, 12, 6, 23] },
       { label: '2025', total: 20.4, populationMil: 8.90, shares: [42, 17, 12, 6, 23] },
+      { label: '2026', total: 20.7, populationMil: 8.95, shares: [42, 17, 12, 6, 23] },
     ],
   },
   {
@@ -406,7 +417,7 @@ const cityBudgetSeedData = [
     state: 'France',
     currencyPrefix: 'EUR ',
     budgetUnit: 'B',
-    usdPerUnit: 1.1885,
+    usdPerUnit: 1.1603,
     shortLabel: 'Paris',
     pageTitle: 'Paris Budget',
     summary:
@@ -425,7 +436,7 @@ const cityBudgetSeedData = [
     ],
     sourceTrail: [
       'Ville de Paris budget primitif materials and annual council budget presentations',
-      '2023 through 2025 align with published budget-expenditure headlines; 2020 through 2022 are rough totals built from official budget sections',
+      '2023 through 2026 align with published budget-expenditure headlines; 2020 through 2022 are rough totals built from official budget sections',
       'Category shares are normalized from major policy blocks and financing items',
     ],
     years: [
@@ -435,6 +446,7 @@ const cityBudgetSeedData = [
       { label: '2023', total: 10.4, populationMil: 2.13, shares: [25, 18, 15, 12, 30] },
       { label: '2024', total: 11.0, populationMil: 2.11, shares: [25, 18, 15, 12, 30] },
       { label: '2025', total: 11.0, populationMil: 2.10, shares: [25, 18, 15, 12, 30] },
+      { label: '2026', total: 11.3, populationMil: 2.09, shares: [25, 18, 15, 12, 30] },
     ],
   },
 ];
@@ -475,6 +487,7 @@ function buildHistoricalYears(city) {
   const anchorStart = city.years[0];
   const anchorEnd = city.years[city.years.length - 1];
   const totalGrowth = anchorEnd.total / anchorStart.total;
+  const anchorSpan = Number(anchorEnd.label) - Number(anchorStart.label);
   const historicalYears = [];
 
   for (let year = 2019; year >= 2000; year -= 1) {
@@ -482,7 +495,7 @@ function buildHistoricalYears(city) {
     const decay = Math.pow(totalGrowth, 0.32 * distance);
     const total = anchorStart.total / decay;
     const populationDelta = anchorStart.populationMil - anchorEnd.populationMil;
-    const populationMil = anchorStart.populationMil + (populationDelta / 5) * distance;
+    const populationMil = anchorStart.populationMil + (populationDelta / anchorSpan) * distance;
     const progress = distance / 20;
     const shares = interpolateShares(
       anchorStart.shares,
@@ -515,10 +528,10 @@ function expandCityYears(city) {
       ...city.sourceTrail,
       ...(city.usdPerUnit
         ? [
-            'USD equivalents use fixed Federal Reserve H.10 reference rates from the January 30, 2026 weekly table released on February 2, 2026.',
+            'USD equivalents use fixed Federal Reserve H.10 reference rates from the May 22, 2026 weekly table released on May 26, 2026.',
           ]
         : []),
-      '2000-2019 rows are smooth historical estimates backcast from the published 2020-2025 anchors in this atlas.',
+      '2000-2019 rows are smooth historical estimates backcast from the published 2020-2026 anchors in this atlas.',
     ],
     years: [...historicalYears, ...anchorYears],
   };

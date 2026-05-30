@@ -331,6 +331,7 @@ function renderCityPage() {
   const reverseChronologicalYears = [...chronologicalYears].reverse();
   const firstYear = chronologicalYears[0];
   const latestYear = chronologicalYears[chronologicalYears.length - 1];
+  const fullRange = `${firstYear.label}-${latestYear.label}`;
   const growth = ((latestYear.total - firstYear.total) / firstYear.total) * 100;
   const largestShare = Math.max(...latestYear.shares);
   const largestCategory = city.categories[latestYear.shares.indexOf(largestShare)];
@@ -346,10 +347,10 @@ function renderCityPage() {
         <h1>${city.pageTitle}</h1>
         <p class="city-hero__summary">${city.summary}</p>
         <div class="city-hero__chips">
-          <span class="chip">2025 total ${atlasHelpers.formatBudget(latestYear.total, city)}</span>
-          <span class="chip">2025 per resident ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)}</span>
-          <span class="chip">2000-2025 change ${growth > 0 ? '+' : ''}${growth.toFixed(1)}%</span>
-          <span class="chip">Largest 2025 bucket ${largestCategory}</span>
+          <span class="chip">${latestYear.label} total ${atlasHelpers.formatBudget(latestYear.total, city)}</span>
+          <span class="chip">${latestYear.label} per resident ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)}</span>
+          <span class="chip">${fullRange} change ${growth > 0 ? '+' : ''}${growth.toFixed(1)}%</span>
+          <span class="chip">Largest ${latestYear.label} bucket ${largestCategory}</span>
         </div>
       </div>
       <aside class="city-hero__note">
@@ -366,7 +367,7 @@ function renderCityPage() {
         (year) => year.total,
         {
           kicker: 'Budget Trend',
-          title: 'Total budget, 2000-2025',
+          title: `Total budget, ${fullRange}`,
           stroke: city.colors[0],
           fill: 'rgba(159, 77, 39, 0.14)',
           format: (value) => atlasHelpers.formatBudget(value, city),
@@ -380,7 +381,7 @@ function renderCityPage() {
         (year) => (year.total * (city.budgetUnit === 'T' ? 1000000 : 1000)) / year.populationMil,
         {
           kicker: 'Resident Scale',
-          title: 'Per resident, 2000-2025',
+          title: `Per resident, ${fullRange}`,
           stroke: city.colors[3],
           fill: 'rgba(47, 127, 118, 0.14)',
           format: (value) => `${city.currencyPrefix}${Math.round(value).toLocaleString()}`,
@@ -393,7 +394,7 @@ function renderCityPage() {
     <section class="section-block">
       <div class="section-heading reveal">
         <p class="eyebrow">Timeline</p>
-        <h2>Budget cycles from 2000 through 2025.</h2>
+        <h2>Budget cycles from ${firstYear.label} through ${latestYear.label}.</h2>
         <p>
           Each row shows the total city budget for the year and a rough split across
           five high-level categories. Rows are shown in reverse chronological order.
@@ -430,10 +431,10 @@ function renderCityPage() {
         <p class="eyebrow">Readout</p>
         <h2>What stands out in this city.</h2>
         <ul class="bullet-list">
-          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total, city)} in 2000 to ${atlasHelpers.formatBudget(latestYear.total, city)} in 2025.</li>
+          <li>${city.city} moved from ${atlasHelpers.formatBudget(firstYear.total, city)} in ${firstYear.label} to ${atlasHelpers.formatBudget(latestYear.total, city)} in ${latestYear.label}.</li>
           <li>Estimated spending per resident moved from ${atlasHelpers.formatPerResident(firstYear.total, firstYear.populationMil, city)} to ${atlasHelpers.formatPerResident(latestYear.total, latestYear.populationMil, city)} over the same span.</li>
           <li>${largestCategory} is the biggest normalized category in the latest year at ${largestShare}%.</li>
-          <li>The mix is rounded, and pre-2020 rows are backfilled estimates anchored to the published 2020-2025 series used by this atlas.</li>
+          <li>The mix is rounded, and pre-2020 rows are backfilled estimates anchored to the published 2020-${latestYear.label} series used by this atlas.</li>
         </ul>
       </div>
       <div class="detail-panel reveal">
@@ -456,16 +457,16 @@ function renderCityPage() {
       </div>
       <div class="next-steps-grid">
         <article class="next-step-card">
-          <p class="panel-kicker">1. Start With The 2025 Leader</p>
+          <p class="panel-kicker">1. Start With The ${latestYear.label} Leader</p>
           <h3>Pressure-test ${largestCategory} first.</h3>
           <p>
-            It is the biggest 2025 bucket at ${largestShare}% of the rough mix, so this
+            It is the biggest ${latestYear.label} bucket at ${largestShare}% of the rough mix, so this
             is usually the fastest place to check whether long-run growth is structural
             or temporary.
           </p>
         </article>
         <article class="next-step-card">
-          <p class="panel-kicker">2. Compare 2000 vs 2025</p>
+          <p class="panel-kicker">2. Compare ${firstYear.label} vs ${latestYear.label}</p>
           <h3>Separate long-run growth from short-term spikes.</h3>
           <p>
             Use the top charts and reverse-chronological timeline to see whether

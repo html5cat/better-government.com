@@ -162,7 +162,7 @@ function buildYAxisTicks(maxValue, geometry, formatTick) {
 function buildXAxisTicks(years, geometry) {
   const tickYears = years.filter((year, index) => {
     const numericYear = Number(year.label);
-    return index === 0 || index === years.length - 1 || numericYear % 5 === 0;
+    return index === 0 || index === years.length - 1 || (numericYear % 5 === 0 && index < years.length - 2);
   });
 
   return tickYears
